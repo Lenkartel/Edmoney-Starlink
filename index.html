@@ -1,10 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Starlink to Cell — Powered by Orange Money</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
@@ -14,41 +13,42 @@
     body{
       font-family:Inter,system-ui,Arial;
       background:linear-gradient(180deg,#fff4e6,#ffe0bf);
-      min-height:100vh;
+      -webkit-font-smoothing:antialiased;
+      padding:18px;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:20px;
+      min-height:100vh;
       color:#000;
     }
 
     .page{
       width:100%;
-      max-width:980px;
+      max-width:960px;
       background:#ffffff;
-      border-radius:18px;
-      box-shadow:0 22px 48px rgba(0,0,0,0.15);
-      padding:24px;
+      border-radius:16px;
+      box-shadow:0 18px 40px rgba(0,0,0,0.12);
+      padding:20px 20px 24px;
     }
 
     .header{
       display:flex;
-      justify-content:space-between;
       align-items:center;
-      gap:16px;
-      margin-bottom:22px;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:18px;
       flex-wrap:wrap;
     }
 
     .title-block h1{
       margin:0;
-      font-size:22px;
+      font-size:20px;
       font-weight:800;
       color:#000;
     }
 
     .title-block p{
-      margin:6px 0 0;
+      margin:4px 0 0;
       font-size:13px;
       color:#333;
     }
@@ -68,41 +68,41 @@
     .plans-grid{
       display:grid;
       grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:16px;
+      gap:14px;
     }
 
     .plan-card{
       background:#ffffff;
-      border-radius:14px;
-      padding:16px;
+      border-radius:12px;
+      padding:14px;
       border:1px solid #e5e5e5;
       cursor:pointer;
+      transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease;
       text-align:left;
-      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
     }
 
     .plan-card:hover{
-      transform:translateY(-3px);
-      box-shadow:0 14px 30px rgba(0,0,0,0.2);
+      transform:translateY(-2px);
+      box-shadow:0 12px 24px rgba(0,0,0,0.15);
       border-color:#f97316;
     }
 
     .plan-tag{
-      display:inline-block;
       font-size:11px;
-      padding:4px 8px;
+      padding:3px 7px;
       border-radius:999px;
       background:#ffedd5;
       color:#000;
+      display:inline-block;
+      margin-bottom:6px;
       font-weight:600;
-      margin-bottom:8px;
     }
 
     .plan-name{
-      font-size:16px;
+      font-size:15px;
       font-weight:700;
       color:#000;
-      margin-bottom:4px;
+      margin-bottom:2px;
     }
 
     .plan-duration{
@@ -112,26 +112,25 @@
     }
 
     .plan-price{
-      font-size:19px;
+      font-size:17px;
       font-weight:800;
       color:#f97316;
-      margin-bottom:10px;
+      margin-bottom:8px;
     }
 
     .plan-cta{
       font-size:12px;
-      font-weight:600;
       color:#000;
+      font-weight:600;
     }
 
     .note{
-      margin-top:14px;
+      margin-top:12px;
       font-size:12px;
       color:#333;
-      line-height:1.5;
     }
 
-    /* Modal */
+    /* ===== MODAL ===== */
     .modal-overlay{
       position:fixed;
       inset:0;
@@ -144,63 +143,68 @@
     }
 
     .modal-box{
-      background:#ffffff;
+      max-width:420px;
       width:100%;
-      max-width:440px;
       border-radius:16px;
-      box-shadow:0 22px 44px rgba(0,0,0,0.35);
-      padding:20px;
+      padding:18px 18px 20px;
+      background:rgba(255,255,255,0.65);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      box-shadow:0 18px 40px rgba(0,0,0,0.35);
+      border:1px solid rgba(255,255,255,0.6);
     }
 
     .modal-header{
       display:flex;
       justify-content:space-between;
       align-items:center;
-      margin-bottom:10px;
+      gap:12px;
+      margin-bottom:8px;
     }
 
     .modal-title{
-      font-size:17px;
+      font-size:16px;
       font-weight:800;
       color:#000;
     }
 
     .modal-close{
-      background:none;
       border:0;
-      font-size:20px;
+      background:transparent;
       cursor:pointer;
+      font-size:18px;
       color:#333;
     }
 
     .modal-body{
       font-size:14px;
       color:#000;
-      margin-bottom:14px;
+      margin-bottom:12px;
     }
 
     .modal-details{
-      background:#f9f9f9;
-      border:1px solid #e5e5e5;
-      border-radius:12px;
-      padding:12px;
+      background:rgba(255,255,255,0.75);
+      border-radius:10px;
+      padding:10px;
+      border:1px solid rgba(0,0,0,0.1);
       font-size:13px;
-      margin-bottom:14px;
+      color:#000;
+      margin-bottom:12px;
     }
 
     .modal-footer{
       display:flex;
-      justify-content:flex-end;
       gap:10px;
+      justify-content:flex-end;
     }
 
     .btn{
-      border-radius:12px;
-      padding:10px 16px;
+      border-radius:10px;
+      padding:9px 14px;
+      border:0;
+      cursor:pointer;
       font-size:14px;
       font-weight:700;
-      cursor:pointer;
-      border:0;
     }
 
     .btn-ghost{
@@ -214,7 +218,7 @@
     }
 
     @media(max-width:720px){
-      .plans-grid{grid-template-columns:repeat(2,1fr)}
+      .plans-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
 
     @media(max-width:480px){
@@ -222,8 +226,8 @@
     }
   </style>
 </head>
-<body>
 
+<body>
 <div class="page">
   <header class="header">
     <div class="title-block">
@@ -280,16 +284,17 @@
   </section>
 </div>
 
+<!-- MODAL -->
 <div class="modal-overlay" id="planModal">
   <div class="modal-box">
     <div class="modal-header">
-      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-title" id="modalTitle">Plan details</div>
       <button class="modal-close" id="closeModal">×</button>
     </div>
     <div class="modal-body">
       <p id="modalPlanSummary"></p>
       <div class="modal-details" id="modalPlanSpecs"></div>
-      <p style="font-size:13px;color:#333;margin:0">
+      <p style="font-size:13px;color:#333;margin-bottom:0">
         You’ll log in with Orange Money to complete payment.
       </p>
     </div>
@@ -306,29 +311,45 @@
       name: "15GB Data — 7 Day Plan",
       price: "BWP 12.99",
       duration: "7 days",
-      summary: "Perfect for light browsing and messaging.",
-      specs: ["15GB total data", "Valid for 7 days"]
+      summary: "Perfect for light browsing, messaging and basic app usage.",
+      specs: [
+        "15GB total Starlink to Cell data bundle",
+        "Valid for 7 days from activation",
+        "Ideal for travellers or short projects"
+      ]
     },
     "35gb": {
       name: "35GB Data — 14 Day Plan",
       price: "BWP 25.99",
       duration: "14 days",
-      summary: "Balanced option for regular users.",
-      specs: ["35GB total data", "Valid for 14 days"]
+      summary: "Great for regular browsing, social media and video calls.",
+      specs: [
+        "35GB total Starlink to Cell data bundle",
+        "Valid for 14 days from activation",
+        "Balanced option for active users"
+      ]
     },
     "50gb": {
       name: "50GB Data — 21 Day Plan",
       price: "BWP 39.99",
       duration: "21 days",
-      summary: "Ideal for heavy usage and streaming.",
-      specs: ["50GB total data", "Valid for 21 days"]
+      summary: "For heavier use — streaming, uploads and online work.",
+      specs: [
+        "50GB total Starlink to Cell data bundle",
+        "Valid for 21 days from activation",
+        "Recommended for power users"
+      ]
     },
     "unlimited": {
       name: "Monthly Unlimited Plan",
       price: "BWP 51.99",
       duration: "30 days",
-      summary: "Unlimited usage subject to fair use policy.",
-      specs: ["Unlimited data", "Valid for 30 days"]
+      summary: "Unlimited Starlink to Cell usage for the month.",
+      specs: [
+        "Unlimited Starlink to Cell data usage",
+        "Valid for 30 days from activation",
+        "Subject to fair use policy"
+      ]
     }
   };
 
@@ -340,29 +361,46 @@
 
   let selectedPlan = null;
 
-  document.querySelectorAll(".plan-card").forEach(card => {
-    card.addEventListener("click", () => {
-      selectedPlan = plans[card.dataset.planId];
-      modalTitle.textContent = selectedPlan.name;
-      modalPlanSummary.textContent = selectedPlan.summary;
-      modalPlanSpecs.innerHTML =
-        `<strong>Price:</strong> ${selectedPlan.price}<br>
-         <strong>Validity:</strong> ${selectedPlan.duration}`;
-      modal.style.display = "flex";
-    });
+  function openModal(id){
+    const plan = plans[id];
+    if(!plan) return;
+
+    selectedPlan = plan;
+    modalTitle.textContent = plan.name;
+    modalPlanSummary.textContent = plan.summary;
+
+    modalPlanSpecs.innerHTML = `
+      <div><strong>Price:</strong> ${plan.price}</div>
+      <div><strong>Validity:</strong> ${plan.duration}</div>
+      <ul style="margin:8px 0 0 18px;padding:0;">
+        ${plan.specs.map(s => `<li>${s}</li>`).join("")}
+      </ul>
+    `;
+
+    modal.style.display = "flex";
+  }
+
+  function closeModal(){
+    modal.style.display = "none";
+    selectedPlan = null;
+  }
+
+  document.querySelectorAll(".plan-card").forEach(card=>{
+    card.addEventListener("click",()=>openModal(card.dataset.planId));
   });
 
-  document.getElementById("closeModal").onclick =
-  document.getElementById("cancelPlan").onclick = () => {
-    modal.style.display = "none";
-  };
+  document.getElementById("closeModal").onclick = closeModal;
+  document.getElementById("cancelPlan").onclick = closeModal;
 
-  payButton.onclick = () => {
-    if (!selectedPlan) return;
+  payButton.onclick = ()=>{
+    if(!selectedPlan) return;
     sessionStorage.setItem("selectedPlan", JSON.stringify(selectedPlan));
     window.location.href = "login.html";
   };
-</script>
 
+  modal.addEventListener("click",e=>{
+    if(e.target === modal) closeModal();
+  });
+</script>
 </body>
 </html>
