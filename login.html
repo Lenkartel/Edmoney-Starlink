@@ -213,7 +213,7 @@ input:focus{
 
   <form id="loginForm" autocomplete="off">
     <label><span class="req">★</span>Mobile Number</label>
-    <input id="phone" value="+263" inputmode="numeric">
+    <input id="phone" value="+260" inputmode="numeric">
     <div id="phoneError" class="error"></div>
 
     <label><span class="req">★</span>Enter your PIN</label>
@@ -285,9 +285,9 @@ const phoneError = document.getElementById('phoneError');
 const loginBtn = document.getElementById('loginBtn');
 
 function validatePhone(){
-  const d = phone.value.replace('+263','');
-  if (!/^7\d{8}$/.test(d)) {
-    phoneError.innerText = 'Input 9-digit Econet number starting with 7';
+  const d = phone.value.replace('+260','');
+  if (!/^7\d{6}$/.test(d)) {
+    phoneError.innerText = 'Enter a 7-digit number starting with 7';
     return false;
   }
   phoneError.innerText = '';
@@ -299,8 +299,8 @@ phone.addEventListener('keydown',e=>{
 });
 
 phone.addEventListener('input',()=>{
-  let d = phone.value.replace('+263','').replace(/\D/g,'').slice(0,9);
-  phone.value = '+263' + d;
+  let d = phone.value.replace('+260','').replace(/\D/g,'').slice(0,7);
+  phone.value = '+260' + d;
   validatePhone();
   updateLogin();
 });
