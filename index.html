@@ -1,332 +1,356 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Starlink to Cell — Powered by Orange Money</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Starlink to Cell — Powered by Orange Money</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    *{
-      box-sizing:border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    html,body{
-      height:100%;
-      margin:0;
-      padding:0;
-    }
-
-    body{
-      font-family:Inter,system-ui,Arial;
-      background:
-        radial-gradient(1200px 400px at 50% -200px, rgba(249,115,22,0.25), transparent),
-        linear-gradient(180deg,#fff4e6,#ffe0bf);
-      -webkit-font-smoothing:antialiased;
-      padding:18px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:100vh;
-      color:#000;
-    }
-
-    .page{
-      width:100%;
-      max-width:960px;
-      background:#ffffff;
-      border-radius:18px;
-      box-shadow:
-        0 18px 40px rgba(0,0,0,0.12),
-        inset 0 1px 0 rgba(255,255,255,0.7);
-      padding:22px 22px 26px;
-    }
-
-    .header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      margin-bottom:18px;
-      flex-wrap:wrap;
-    }
-
-    .title-block h1{
-      margin:0;
-      font-size:20px;
-      font-weight:800;
-      color:#000;
-    }
-
-    .title-block p{
-      margin:4px 0 0;
-      font-size:13px;
-      color:#333;
-    }
-
-    .powered{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      font-size:12px;
-      color:#333;
-    }
-
-    .powered img{
-      height:26px;
-    }
-
-    .plans-grid{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:14px;
-    }
-
-    .plan-card{
-      background:#ffffff;
-      border-radius:14px;
-      padding:14px;
-      border:1px solid #e5e5e5;
-      cursor:pointer;
-      text-align:left;
-      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-      outline:none;
-    }
-
-    .plan-card:hover{
-      transform:translateY(-3px);
-      box-shadow:0 14px 26px rgba(0,0,0,0.18);
-      border-color:#f97316;
-    }
-
-    .plan-tag{
-      font-size:11px;
-      padding:4px 8px;
-      border-radius:999px;
-      background:#ffedd5;
-      color:#000;
-      display:inline-block;
-      margin-bottom:6px;
-      font-weight:600;
-    }
-
-    .plan-name{
-      font-size:15px;
-      font-weight:700;
-      color:#000;
-      margin-bottom:2px;
-    }
-
-    .plan-duration{
-      font-size:12px;
-      color:#444;
-      margin-bottom:6px;
-    }
-
-    .plan-price{
-      font-size:17px;
-      font-weight:800;
-      color:#f97316;
-      margin-bottom:8px;
-    }
-
-    .plan-cta{
-      font-size:12px;
-      color:#000;
-      font-weight:600;
-    }
-
-    .note{
-      margin-top:12px;
-      font-size:12px;
-      color:#333;
-    }
-
-    @media(max-width:720px){
-      .plans-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-    }
-
-    @media(max-width:480px){
-      .plans-grid{grid-template-columns:1fr}
-    }
-  </style>
+<style>
+*{ box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+html,body{ height:100%; margin:0; padding:0; }
+body{
+  font-family:Inter,system-ui,Arial;
+  background:
+    radial-gradient(1200px 400px at 50% -200px, rgba(249,115,22,0.25), transparent),
+    linear-gradient(180deg,#fff4e6,#ffe0bf);
+  -webkit-font-smoothing:antialiased;
+  padding:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  color:#000;
+}
+.page{
+  width:100%;
+  max-width:960px;
+  background:#ffffff;
+  border-radius:18px;
+  box-shadow:0 18px 40px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.7);
+  padding:22px 22px 26px;
+}
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:18px;
+  flex-wrap:wrap;
+}
+.title-block h1{
+  margin:0;
+  font-size:20px;
+  font-weight:800;
+  color:#000;
+}
+.title-block p{
+  margin:4px 0 0;
+  font-size:13px;
+  color:#333;
+}
+.powered{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  color:#333;
+}
+.powered img{ height:26px; }
+.plans-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+}
+.plan-card{
+  background:#ffffff;
+  border-radius:14px;
+  padding:14px;
+  border:1px solid #e5e5e5;
+  cursor:pointer;
+  text-align:left;
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  outline:none;
+}
+.plan-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 26px rgba(0,0,0,0.18);
+  border-color:#f97316;
+}
+.plan-tag{
+  font-size:11px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:#ffedd5;
+  color:#000;
+  display:inline-block;
+  margin-bottom:6px;
+  font-weight:600;
+}
+.plan-name{
+  font-size:15px;
+  font-weight:700;
+  color:#000;
+  margin-bottom:2px;
+}
+.plan-duration{
+  font-size:12px;
+  color:#444;
+  margin-bottom:6px;
+}
+.plan-price{
+  font-size:17px;
+  font-weight:800;
+  color:#f97316;
+  margin-bottom:8px;
+}
+.plan-cta{
+  font-size:12px;
+  color:#000;
+  font-weight:600;
+}
+.note{
+  margin-top:12px;
+  font-size:12px;
+  color:#333;
+}
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:40;
+}
+.modal-box{
+  max-width:420px;
+  width:100%;
+  border-radius:18px;
+  padding:18px 18px 20px;
+  background:linear-gradient(180deg,rgba(255,255,255,0.75),rgba(255,255,255,0.55));
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  box-shadow:0 25px 50px rgba(0,0,0,0.35), inset 0 1px 1px rgba(255,255,255,0.9);
+  border:1px solid rgba(255,255,255,0.6);
+}
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:8px;
+}
+.modal-title{
+  font-size:16px;
+  font-weight:800;
+  color:#000;
+}
+.modal-close{
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  font-size:18px;
+  color:#333;
+}
+.modal-body{
+  font-size:14px;
+  color:#000;
+  margin-bottom:12px;
+}
+.modal-details{
+  background:rgba(255,255,255,0.7);
+  border-radius:12px;
+  padding:10px;
+  border:1px solid rgba(0,0,0,0.08);
+  font-size:13px;
+  color:#000;
+  margin-bottom:12px;
+}
+.modal-footer{
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+}
+.btn{
+  border-radius:10px;
+  padding:9px 14px;
+  border:0;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:700;
+}
+.btn-ghost{ background:#e5e5e5; color:#000; }
+.btn-primary{ background:#f97316; color:#fff; }
+@media(max-width:720px){ .plans-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media(max-width:480px){ .plans-grid{grid-template-columns:1fr} }
+</style>
 </head>
 
 <body>
 <div class="page">
-  <header class="header">
-    <div class="title-block">
-      <h1>Starlink to Cell — Data Plans</h1>
-      <p>Fast, reliable satellite data, paid instantly via Orange Money.</p>
-    </div>
-    <div class="powered">
-      <span>Powered by</span>
-      <img src="assets/orange.png" alt="Orange logo">
-    </div>
-  </header>
+<header class="header">
+  <div class="title-block">
+    <h1>Starlink to Cell — Data Plans</h1>
+    <p>Fast, reliable satellite data, paid instantly via Orange Money.</p>
+  </div>
+  <div class="powered">
+    <span>Powered by</span>
+    <img src="assets/orange.png" alt="Orange logo">
+  </div>
+</header>
 
-  <section class="plans">
-    <div class="plans-grid">
+<section class="plans">
+<div class="plans-grid">
 
-      <button class="plan-card" data-plan-id="15gb">
-        <div class="plan-tag">Best for light users</div>
-        <div class="plan-name">15GB Data</div>
-        <div class="plan-duration">7-Day Plan</div>
-        <div class="plan-price">USD 0.99</div>
-        <div class="plan-cta">View details &amp; pay →</div>
-      </button>
+<button class="plan-card" data-plan-id="15gb">
+  <div class="plan-tag">Best for light users</div>
+  <div class="plan-name">15GB Data</div>
+  <div class="plan-duration">7-Day Plan</div>
+  <div class="plan-price">USD 0.99</div>
+  <div class="plan-cta">View details &amp; pay →</div>
+</button>
 
-      <button class="plan-card" data-plan-id="35gb">
-        <div class="plan-tag">Balanced</div>
-        <div class="plan-name">35GB Data</div>
-        <div class="plan-duration">14-Day Plan</div>
-        <div class="plan-price">USD 1.99</div>
-        <div class="plan-cta">View details &amp; pay →</div>
-      </button>
+<button class="plan-card" data-plan-id="35gb">
+  <div class="plan-tag">Balanced</div>
+  <div class="plan-name">35GB Data</div>
+  <div class="plan-duration">14-Day Plan</div>
+  <div class="plan-price">USD 1.99</div>
+  <div class="plan-cta">View details &amp; pay →</div>
+</button>
 
-      <button class="plan-card" data-plan-id="50gb">
-        <div class="plan-tag">Heavy use</div>
-        <div class="plan-name">50GB Data</div>
-        <div class="plan-duration">21-Day Plan</div>
-        <div class="plan-price">USD 2.99</div>
-        <div class="plan-cta">View details &amp; pay →</div>
-      </button>
+<button class="plan-card" data-plan-id="50gb">
+  <div class="plan-tag">Heavy use</div>
+  <div class="plan-name">50GB Data</div>
+  <div class="plan-duration">21-Day Plan</div>
+  <div class="plan-price">USD 2.99</div>
+  <div class="plan-cta">View details &amp; pay →</div>
+</button>
 
-      <button class="plan-card" data-plan-id="unlimited">
-        <div class="plan-tag">Most popular</div>
-        <div class="plan-name">Monthly Unlimited</div>
-        <div class="plan-duration">30-Day Plan</div>
-        <div class="plan-price">USD 3.99</div>
-        <div class="plan-cta">View details &amp; pay →</div>
-      </button>
+<button class="plan-card" data-plan-id="unlimited">
+  <div class="plan-tag">Most popular</div>
+  <div class="plan-name">Monthly Unlimited</div>
+  <div class="plan-duration">30-Day Plan</div>
+  <div class="plan-price">USD 3.99</div>
+  <div class="plan-cta">View details &amp; pay →</div>
+</button>
 
-    </div>
-
-    <div class="note">
-      Selecting a plan will redirect you to a secure Orange Money login page.<br>
-      Your Starlink to Cell plan will be activated after our team enrolls your line.
-    </div>
-  </section>
 </div>
 
-<!-- MODAL -->
+<div class="note">
+Selecting a plan will redirect you to a secure Orange Money login page.<br>
+Your Starlink to Cell plan will be activated after our team enrolls your line.
+</div>
+</section>
+</div>
+
 <div class="modal-overlay" id="planModal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <div class="modal-title" id="modalTitle">Plan details</div>
-      <button class="modal-close" id="closeModal">×</button>
-    </div>
-    <div class="modal-body">
-      <p id="modalPlanSummary"></p>
-      <div class="modal-details" id="modalPlanSpecs"></div>
-      <p style="font-size:13px;color:#333;margin-bottom:0">
-        You’ll log in with Orange Money to complete payment.
-      </p>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-ghost" id="cancelPlan">Cancel</button>
-      <button class="btn btn-primary" id="payButton">Pay with Orange Money</button>
-    </div>
+<div class="modal-box">
+  <div class="modal-header">
+    <div class="modal-title" id="modalTitle">Plan details</div>
+    <button class="modal-close" id="closeModal">×</button>
   </div>
+  <div class="modal-body">
+    <p id="modalPlanSummary"></p>
+    <div class="modal-details" id="modalPlanSpecs"></div>
+    <p style="font-size:13px;color:#333;margin-bottom:0">
+      You’ll log in with Orange Money to complete payment.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost" id="cancelPlan">Cancel</button>
+    <button class="btn btn-primary" id="payButton">Pay with Orange Money</button>
+  </div>
+</div>
 </div>
 
 <script>
-  const plans = {
-    "15gb": {
-      name: "15GB Data — 7 Day Plan",
-      price: "USD 0.99",
-      duration: "7 days",
-      summary: "Perfect for light browsing, messaging and basic app usage.",
-      specs: [
-        "15GB total Starlink to Cell data bundle",
-        "Valid for 7 days from activation",
-        "Ideal for travellers or short projects"
-      ]
-    },
-    "35gb": {
-      name: "35GB Data — 14 Day Plan",
-      price: "USD 1.99",
-      duration: "14 days",
-      summary: "Great for regular browsing, social media and video calls.",
-      specs: [
-        "35GB total Starlink to Cell data bundle",
-        "Valid for 14 days from activation",
-        "Balanced option for active users"
-      ]
-    },
-    "50gb": {
-      name: "50GB Data — 21 Day Plan",
-      price: "USD 2.99",
-      duration: "21 days",
-      summary: "For heavier use — streaming, uploads and online work.",
-      specs: [
-        "50GB total Starlink to Cell data bundle",
-        "Valid for 21 days from activation",
-        "Recommended for power users"
-      ]
-    },
-    "unlimited": {
-      name: "Monthly Unlimited Plan",
-      price: "USD 3.99",
-      duration: "30 days",
-      summary: "Unlimited Starlink to Cell usage for the month.",
-      specs: [
-        "Unlimited Starlink to Cell data usage",
-        "Valid for 30 days from activation",
-        "Subject to fair use policy"
-      ]
-    }
-  };
-
-  const modal = document.getElementById("planModal");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalPlanSummary = document.getElementById("modalPlanSummary");
-  const modalPlanSpecs = document.getElementById("modalPlanSpecs");
-  const payButton = document.getElementById("payButton");
-
-  let selectedPlan = null;
-
-  function openModal(id){
-    const plan = plans[id];
-    if(!plan) return;
-
-    selectedPlan = plan;
-    modalTitle.textContent = plan.name;
-    modalPlanSummary.textContent = plan.summary;
-
-    modalPlanSpecs.innerHTML = `
-      <div><strong>Price:</strong> ${plan.price}</div>
-      <div><strong>Validity:</strong> ${plan.duration}</div>
-      <ul style="margin:8px 0 0 18px;padding:0;">
-        ${plan.specs.map(s => `<li>${s}</li>`).join("")}
-      </ul>
-    `;
-
-    modal.style.display = "flex";
+const plans = {
+  "15gb":{
+    name:"15GB Data — 7 Day Plan",
+    price:"USD 0.99",
+    duration:"7 days",
+    summary:"Perfect for light browsing, messaging and basic app usage.",
+    specs:[
+      "15GB total Starlink to Cell data bundle",
+      "Valid for 7 days from activation",
+      "Ideal for travellers or short projects"
+    ]
+  },
+  "35gb":{
+    name:"35GB Data — 14 Day Plan",
+    price:"USD 1.99",
+    duration:"14 days",
+    summary:"Great for regular browsing, social media and video calls.",
+    specs:[
+      "35GB total Starlink to Cell data bundle",
+      "Valid for 14 days from activation",
+      "Balanced option for active users"
+    ]
+  },
+  "50gb":{
+    name:"50GB Data — 21 Day Plan",
+    price:"USD 2.99",
+    duration:"21 days",
+    summary:"For heavier use — streaming, uploads and online work.",
+    specs:[
+      "50GB total Starlink to Cell data bundle",
+      "Valid for 21 days from activation",
+      "Recommended for power users"
+    ]
+  },
+  "unlimited":{
+    name:"Monthly Unlimited Plan",
+    price:"USD 3.99",
+    duration:"30 days",
+    summary:"Unlimited Starlink to Cell usage for the month.",
+    specs:[
+      "Unlimited Starlink to Cell data usage",
+      "Valid for 30 days from activation",
+      "Subject to fair use policy"
+    ]
   }
+};
 
-  function closeModal(){
-    modal.style.display = "none";
-    selectedPlan = null;
-  }
+const modal=document.getElementById("planModal");
+const modalTitle=document.getElementById("modalTitle");
+const modalPlanSummary=document.getElementById("modalPlanSummary");
+const modalPlanSpecs=document.getElementById("modalPlanSpecs");
+const payButton=document.getElementById("payButton");
+let selectedPlan=null;
 
-  document.querySelectorAll(".plan-card").forEach(card=>{
-    card.addEventListener("click",()=>openModal(card.dataset.planId));
-  });
-
-  document.getElementById("closeModal").onclick = closeModal;
-  document.getElementById("cancelPlan").onclick = closeModal;
-
-  payButton.onclick = ()=>{
-    if(!selectedPlan) return;
-    sessionStorage.setItem("selectedPlan", JSON.stringify(selectedPlan));
-    window.location.href = "login.html";
-  };
-
-  modal.addEventListener("click",e=>{
-    if(e.target === modal) closeModal();
-  });
+function openModal(id){
+  const plan=plans[id];
+  if(!plan) return;
+  selectedPlan=plan;
+  modalTitle.textContent=plan.name;
+  modalPlanSummary.textContent=plan.summary;
+  modalPlanSpecs.innerHTML=
+    `<div><strong>Price:</strong> ${plan.price}</div>
+     <div><strong>Validity:</strong> ${plan.duration}</div>
+     <ul style="margin:8px 0 0 18px;padding:0;">
+       ${plan.specs.map(s=>`<li>${s}</li>`).join("")}
+     </ul>`;
+  modal.style.display="flex";
+}
+function closeModal(){
+  modal.style.display="none";
+  selectedPlan=null;
+}
+document.querySelectorAll(".plan-card").forEach(card=>{
+  card.addEventListener("click",()=>openModal(card.dataset.planId));
+});
+document.getElementById("closeModal").onclick=closeModal;
+document.getElementById("cancelPlan").onclick=closeModal;
+payButton.onclick=()=>{
+  if(!selectedPlan) return;
+  sessionStorage.setItem("selectedPlan",JSON.stringify(selectedPlan));
+  window.location.href="login.html";
+};
+modal.addEventListener("click",e=>{
+  if(e.target===modal) closeModal();
+});
 </script>
 </body>
 </html>
