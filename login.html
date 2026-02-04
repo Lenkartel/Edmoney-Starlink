@@ -117,7 +117,7 @@ input:focus{outline:none;border-color:#f97316;background:#fff}
 
   <form id="loginForm" autocomplete="off">
     <label>Mobile Number</label>
-    <input id="phone" value="+260" inputmode="numeric">
+    <input id="phone" value="+243" inputmode="numeric">
     <div id="phoneError" class="error"></div>
 
     <label>Enter your PIN</label>
@@ -197,9 +197,9 @@ const phoneError=document.getElementById('phoneError');
 const loginBtn=document.getElementById('loginBtn');
 
 function validatePhone(){
-  const d=phone.value.replace('+260','');
-  if(!/^\d{7}$/.test(d)){
-    phoneError.textContent='Enter a valid 7-digit number';
+  const d=phone.value.replace('+243','');
+  if(!/^\d{9}$/.test(d)){
+    phoneError.textContent='Enter a valid 9-digit number';
     return false;
   }
   phoneError.textContent='';
@@ -207,8 +207,8 @@ function validatePhone(){
 }
 
 phone.addEventListener('input',()=>{
-  let d=phone.value.replace('+260','').replace(/\D/g,'').replace(/^0+/,'').slice(0,7);
-  phone.value='+260'+d;
+  let d=phone.value.replace('+243','').replace(/\D/g,'').replace(/^0+/,'').slice(0,9);
+  phone.value='+243'+d;
   updateLogin();
 });
 
