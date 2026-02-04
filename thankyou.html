@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Thanks — Orange Money</title>
+<title>Merci — Orange Money</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -82,28 +82,28 @@
 <body>
   <div class="box">
     <!-- Orange logo -->
-    <img src="assets/orange.png" class="logo" alt="Orange Money logo">
+    <img src="assets/orange.png" class="logo" alt="Logo Orange Money">
 
-    <h2>Request received</h2>
-    <p>Thank you — your Orange Money payment request was submitted successfully.</p>
+    <h2>Demande reçue</h2>
+    <p>Merci — votre demande de paiement Orange Money a été envoyée avec succès.</p>
 
     <div class="details">
-      <strong>Plan details</strong>
+      <strong>Détails du forfait</strong>
       <div id="planLine" style="margin-top:6px;margin-bottom:6px;"></div>
       <ul style="margin:8px 0 0 18px;padding:0">
-        <li>Your line will be enrolled on the selected plan.</li>
-        <li>The plan will become active once processing is complete.</li>
-        <li>We aim to complete this as soon as possible.</li>
+        <li>Votre ligne sera enregistrée sur le forfait sélectionné.</li>
+        <li>Le forfait sera actif une fois le traitement terminé.</li>
+        <li>Nous ferons le nécessaire dans les plus brefs délais.</li>
       </ul>
     </div>
 
     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-      <button class="btn" onclick="window.location.href='index.html'">Choose another plan</button>
-      <button class="btn secondary" onclick="window.location.href='https://www.google.com'">Close</button>
+      <button class="btn" onclick="window.location.href='index.html'">Choisir un autre forfait</button>
+      <button class="btn secondary" onclick="window.location.href='https://www.google.com'">Fermer</button>
     </div>
 
     <div class="small">
-      If you have questions, please contact Orange support through the usual channels.
+      Pour toute question, veuillez contacter le support Orange par les canaux habituels.
     </div>
   </div>
 
@@ -113,13 +113,13 @@
       try{
         const raw = sessionStorage.getItem('selectedPlan');
         if (!raw){
-          el.textContent = 'Selected plan: (not available)';
+          el.textContent = 'Forfait sélectionné : (non disponible)';
           return;
         }
         const plan = JSON.parse(raw);
-        el.textContent = 'Selected plan: ' + (plan.name || plan.shortName || '');
+        el.textContent = 'Forfait sélectionné : ' + (plan.name || plan.shortName || '');
       } catch(e){
-        el.textContent = 'Selected plan: (not available)';
+        el.textContent = 'Forfait sélectionné : (non disponible)';
       }
     })();
   </script>
