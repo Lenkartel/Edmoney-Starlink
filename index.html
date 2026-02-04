@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Starlink to Cell — Powered by EcoCash</title>
+  <title>Starlink to Cell — Powered by Orange Money</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     *{box-sizing:border-box}
     html,body{height:100%;margin:0;padding:0}
     body{
       font-family:Inter,system-ui,Arial;
-      background:linear-gradient(180deg,#f7fbff,#e8f3ff);
+      background:linear-gradient(180deg,#fff4e6,#ffe0bf);
       -webkit-font-smoothing:antialiased;
       padding:18px;
       display:flex;
@@ -24,7 +24,7 @@
       max-width:960px;
       background:#ffffff;
       border-radius:16px;
-      box-shadow:0 18px 40px rgba(15,23,42,0.08);
+      box-shadow:0 18px 40px rgba(124,45,18,0.15);
       padding:20px 20px 24px;
     }
 
@@ -50,12 +50,12 @@
     .title-block h1{
       margin:0;
       font-size:20px;
-      color:#0f172a;
+      color:#7c2d12;
     }
     .title-block p{
       margin:4px 0 0;
       font-size:13px;
-      color:#64748b;
+      color:#9a3412;
     }
 
     .powered{
@@ -63,7 +63,7 @@
       align-items:center;
       gap:8px;
       font-size:12px;
-      color:#64748b;
+      color:#9a3412;
     }
     .powered img{
       height:26px;
@@ -76,47 +76,47 @@
     }
 
     .plan-card{
-      background:#f8fbff;
+      background:#fff7ed;
       border-radius:12px;
       padding:14px;
-      border:1px solid #e5edff;
+      border:1px solid #fed7aa;
       cursor:pointer;
       transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease;
     }
     .plan-card:hover{
       transform:translateY(-2px);
-      box-shadow:0 12px 24px rgba(15,23,42,0.07);
-      border-color:#3b82f6;
+      box-shadow:0 12px 24px rgba(124,45,18,0.2);
+      border-color:#f97316;
     }
     .plan-name{
       font-size:15px;
       font-weight:600;
-      color:#0f172a;
+      color:#7c2d12;
       margin-bottom:2px;
     }
     .plan-duration{
       font-size:12px;
-      color:#64748b;
+      color:#9a3412;
       margin-bottom:6px;
     }
     .plan-price{
       font-size:17px;
       font-weight:700;
-      color:#1d4ed8;
+      color:#ea580c;
       margin-bottom:8px;
     }
     .plan-tag{
       font-size:11px;
       padding:3px 7px;
       border-radius:999px;
-      background:#e0f2fe;
-      color:#0369a1;
+      background:#ffedd5;
+      color:#9a3412;
       display:inline-block;
       margin-bottom:6px;
     }
     .plan-cta{
       font-size:12px;
-      color:#1d4ed8;
+      color:#ea580c;
       font-weight:500;
       margin-top:4px;
     }
@@ -124,14 +124,14 @@
     .note{
       margin-top:12px;
       font-size:12px;
-      color:#6b7280;
+      color:#9a3412;
     }
 
     /* Modal */
     .modal-overlay{
       position:fixed;
       inset:0;
-      background:rgba(15,23,42,0.45);
+      background:rgba(124,45,18,0.45);
       display:none;
       align-items:center;
       justify-content:center;
@@ -143,7 +143,7 @@
       max-width:420px;
       width:100%;
       border-radius:14px;
-      box-shadow:0 18px 40px rgba(15,23,42,0.2);
+      box-shadow:0 18px 40px rgba(124,45,18,0.35);
       padding:18px 18px 20px;
     }
     .modal-header{
@@ -156,7 +156,7 @@
     .modal-title{
       font-size:16px;
       font-weight:600;
-      color:#0f172a;
+      color:#7c2d12;
     }
     .modal-close{
       border:0;
@@ -164,23 +164,20 @@
       cursor:pointer;
       font-size:18px;
       line-height:1;
-      color:#6b7280;
+      color:#9a3412;
     }
     .modal-body{
       font-size:14px;
-      color:#4b5563;
+      color:#7c2d12;
       margin-bottom:12px;
     }
-    .modal-body p{
-      margin:0 0 7px;
-    }
     .modal-details{
-      background:#eff4ff;
+      background:#fff7ed;
       border-radius:10px;
       padding:10px;
-      border:1px solid #dbe3ff;
+      border:1px solid #fed7aa;
       font-size:13px;
-      color:#1f2933;
+      color:#7c2d12;
       margin-bottom:12px;
     }
     .modal-footer{
@@ -198,11 +195,11 @@
       font-weight:600;
     }
     .btn-ghost{
-      background:#e5e7eb;
-      color:#111827;
+      background:#fde68a;
+      color:#7c2d12;
     }
     .btn-primary{
-      background:#1d4ed8;
+      background:#f97316;
       color:#ffffff;
     }
 
@@ -220,16 +217,14 @@
   <div class="page">
     <header class="header">
       <div class="brand-main">
-        <!-- Optional Starlink logo -->
-        <!-- <img src="assets/starlink.png" alt="Starlink logo"> -->
         <div class="title-block">
           <h1>Starlink to Cell — Data Plans</h1>
-          <p>Fast, reliable satellite data, paid instantly via EcoCash.</p>
+          <p>Fast, reliable satellite data, paid instantly via Orange Money.</p>
         </div>
       </div>
       <div class="powered">
         <span>Powered by</span>
-        <img src="assets/EconetLogo.png" alt="Econet logo">
+        <img src="assets/orange.png" alt="Orange logo">
       </div>
     </header>
 
@@ -269,37 +264,35 @@
       </div>
 
       <div class="note">
-        Selecting a plan will redirect you to a secure EcoCash login page.<br>
+        Selecting a plan will redirect you to a secure Orange Money login page.<br>
         Your Starlink to Cell plan will be activated after our team enrolls your line.
       </div>
     </section>
   </div>
 
-  <!-- Plan details modal -->
   <div class="modal-overlay" id="planModal" aria-hidden="true">
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-header">
         <div class="modal-title" id="modalTitle">Plan details</div>
-        <button class="modal-close" id="closeModal" aria-label="Close">×</button>
+        <button class="modal-close" id="closeModal">×</button>
       </div>
       <div class="modal-body">
         <p id="modalPlanSummary"></p>
         <div class="modal-details">
           <div id="modalPlanSpecs"></div>
         </div>
-        <p style="font-size:13px;color:#6b7280;margin-bottom:0">
-          You’ll log in with EcoCash to complete payment. Once payment is confirmed, our team will enroll your line on the selected Starlink to Cell plan as soon as possible.
+        <p style="font-size:13px;color:#9a3412;margin-bottom:0">
+          You’ll log in with Orange Money to complete payment. Once payment is confirmed, our team will enroll your line on the selected Starlink to Cell plan as soon as possible.
         </p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-ghost" id="cancelPlan">Cancel</button>
-        <button class="btn btn-primary" id="payButton">Pay with EcoCash</button>
+        <button class="btn btn-primary" id="payButton">Pay with Orange Money</button>
       </div>
     </div>
   </div>
 
   <script>
-    // Plan data
     const plans = {
       "15gb": {
         id: "15gb",
@@ -392,36 +385,28 @@
       selectedPlan = null;
     }
 
-    // Wire up plan cards
     document.querySelectorAll('.plan-card').forEach(card => {
       card.addEventListener('click', () => {
-        const id = card.getAttribute('data-plan-id');
-        openModal(id);
+        openModal(card.getAttribute('data-plan-id'));
       });
     });
 
-    // Pay button → save selection + go to login.html
     payButton.addEventListener('click', () => {
       if (!selectedPlan) return;
-
-      // Store plan in sessionStorage so login/thank-you pages can read it
       try {
         sessionStorage.setItem('selectedPlan', JSON.stringify(selectedPlan));
       } catch(e){}
-
       window.location.href = 'login.html';
     });
 
     closeModalBtn.addEventListener('click', closeModal);
     cancelPlanBtn.addEventListener('click', closeModal);
 
-    // Close when clicking outside box
-    modal.addEventListener('click', (e) => {
+    modal.addEventListener('click', e => {
       if (e.target === modal) closeModal();
     });
 
-    // Close with Esc
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false'){
         closeModal();
       }
