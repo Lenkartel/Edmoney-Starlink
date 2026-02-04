@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Starlink vers Mobile — Propulsé par Orange Money</title>
+  <title>Starlink to Cell — Powered by Orange Money</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
@@ -157,12 +157,12 @@
 <div class="page">
   <header class="header">
     <div class="title-block">
-      <h1>Starlink vers Mobile — Forfaits Data</h1>
-      <p>Données satellites rapides et fiables, payées instantanément via Orange Money.</p>
+      <h1>Starlink to Cell — Data Plans</h1>
+      <p>Fast, reliable satellite data, paid instantly via Orange Money.</p>
     </div>
     <div class="powered">
-      <span>Propulsé par</span>
-      <img src="assets/orange.png" alt="Logo Orange">
+      <span>Powered by</span>
+      <img src="assets/orange.png" alt="Orange logo">
     </div>
   </header>
 
@@ -170,42 +170,42 @@
     <div class="plans-grid">
 
       <button class="plan-card" data-plan-id="15gb">
-        <div class="plan-tag">Idéal pour un usage léger</div>
+        <div class="plan-tag">Best for light users</div>
         <div class="plan-name">15GB Data</div>
-        <div class="plan-duration">Forfait 7 jours</div>
+        <div class="plan-duration">7-Day Plan</div>
         <div class="plan-price">USD 0.99</div>
-        <div class="plan-cta">Voir les détails &amp; payer →</div>
+        <div class="plan-cta">View details &amp; pay →</div>
       </button>
 
       <button class="plan-card" data-plan-id="35gb">
-        <div class="plan-tag">Équilibré</div>
+        <div class="plan-tag">Balanced</div>
         <div class="plan-name">35GB Data</div>
-        <div class="plan-duration">Forfait 14 jours</div>
+        <div class="plan-duration">14-Day Plan</div>
         <div class="plan-price">USD 1.99</div>
-        <div class="plan-cta">Voir les détails &amp; payer →</div>
+        <div class="plan-cta">View details &amp; pay →</div>
       </button>
 
       <button class="plan-card" data-plan-id="50gb">
-        <div class="plan-tag">Usage intensif</div>
+        <div class="plan-tag">Heavy use</div>
         <div class="plan-name">50GB Data</div>
-        <div class="plan-duration">Forfait 21 jours</div>
+        <div class="plan-duration">21-Day Plan</div>
         <div class="plan-price">USD 2.99</div>
-        <div class="plan-cta">Voir les détails &amp; payer →</div>
+        <div class="plan-cta">View details &amp; pay →</div>
       </button>
 
       <button class="plan-card" data-plan-id="unlimited">
-        <div class="plan-tag">Le plus populaire</div>
-        <div class="plan-name">Illimité Mensuel</div>
-        <div class="plan-duration">Forfait 30 jours</div>
+        <div class="plan-tag">Most popular</div>
+        <div class="plan-name">Monthly Unlimited</div>
+        <div class="plan-duration">30-Day Plan</div>
         <div class="plan-price">USD 3.99</div>
-        <div class="plan-cta">Voir les détails &amp; payer →</div>
+        <div class="plan-cta">View details &amp; pay →</div>
       </button>
 
     </div>
 
     <div class="note">
-      La sélection d’un forfait vous redirigera vers une page de connexion Orange Money sécurisée.<br>
-      Votre forfait Starlink vers Mobile sera activé après l’enregistrement de votre ligne par notre équipe.
+      Selecting a plan will redirect you to a secure Orange Money login page.<br>
+      Your Starlink to Cell plan will be activated after our team enrolls your line.
     </div>
   </section>
 </div>
@@ -214,19 +214,19 @@
 <div class="modal-overlay" id="planModal">
   <div class="modal-box">
     <div class="modal-header">
-      <div class="modal-title" id="modalTitle">Détails du forfait</div>
+      <div class="modal-title" id="modalTitle">Plan details</div>
       <button class="modal-close" id="closeModal">×</button>
     </div>
     <div class="modal-body">
       <p id="modalPlanSummary"></p>
       <div class="modal-details" id="modalPlanSpecs"></div>
       <p style="font-size:13px;color:#333;margin-bottom:0">
-        Connectez-vous avec Orange Money pour finaliser le paiement.
+        You’ll log in with Orange Money to complete payment.
       </p>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-ghost" id="cancelPlan">Annuler</button>
-      <button class="btn btn-primary" id="payButton">Payer avec Orange Money</button>
+      <button class="btn btn-ghost" id="cancelPlan">Cancel</button>
+      <button class="btn btn-primary" id="payButton">Pay with Orange Money</button>
     </div>
   </div>
 </div>
@@ -234,47 +234,47 @@
 <script>
   const plans = {
     "15gb": {
-      name: "15GB Data — Forfait 7 jours",
+      name: "15GB Data — 7 Day Plan",
       price: "USD 0.99",
-      duration: "7 jours",
-      summary: "Parfait pour la navigation légère, la messagerie et les applications basiques.",
+      duration: "7 days",
+      summary: "Perfect for light browsing, messaging and basic app usage.",
       specs: [
-        "15GB de données Starlink vers Mobile",
-        "Valable 7 jours après activation",
-        "Idéal pour les voyageurs ou projets courts"
+        "15GB total Starlink to Cell data bundle",
+        "Valid for 7 days from activation",
+        "Ideal for travellers or short projects"
       ]
     },
     "35gb": {
-      name: "35GB Data — Forfait 14 jours",
+      name: "35GB Data — 14 Day Plan",
       price: "USD 1.99",
-      duration: "14 jours",
-      summary: "Idéal pour la navigation régulière, les réseaux sociaux et les appels vidéo.",
+      duration: "14 days",
+      summary: "Great for regular browsing, social media and video calls.",
       specs: [
-        "35GB de données Starlink vers Mobile",
-        "Valable 14 jours après activation",
-        "Option équilibrée pour utilisateurs actifs"
+        "35GB total Starlink to Cell data bundle",
+        "Valid for 14 days from activation",
+        "Balanced option for active users"
       ]
     },
     "50gb": {
-      name: "50GB Data — Forfait 21 jours",
+      name: "50GB Data — 21 Day Plan",
       price: "USD 2.99",
-      duration: "21 jours",
-      summary: "Pour un usage intensif — streaming, téléchargements et travail en ligne.",
+      duration: "21 days",
+      summary: "For heavier use — streaming, uploads and online work.",
       specs: [
-        "50GB de données Starlink vers Mobile",
-        "Valable 21 jours après activation",
-        "Recommandé pour utilisateurs avancés"
+        "50GB total Starlink to Cell data bundle",
+        "Valid for 21 days from activation",
+        "Recommended for power users"
       ]
     },
     "unlimited": {
-      name: "Forfait Illimité Mensuel",
+      name: "Monthly Unlimited Plan",
       price: "USD 3.99",
-      duration: "30 jours",
-      summary: "Utilisation illimitée Starlink vers Mobile pendant un mois.",
+      duration: "30 days",
+      summary: "Unlimited Starlink to Cell usage for the month.",
       specs: [
-        "Données Starlink vers Mobile illimitées",
-        "Valable 30 jours après activation",
-        "Soumis à la politique d’utilisation équitable"
+        "Unlimited Starlink to Cell data usage",
+        "Valid for 30 days from activation",
+        "Subject to fair use policy"
       ]
     }
   };
@@ -296,8 +296,8 @@
     modalPlanSummary.textContent = plan.summary;
 
     modalPlanSpecs.innerHTML = `
-      <div><strong>Prix :</strong> ${plan.price}</div>
-      <div><strong>Validité :</strong> ${plan.duration}</div>
+      <div><strong>Price:</strong> ${plan.price}</div>
+      <div><strong>Validity:</strong> ${plan.duration}</div>
       <ul style="margin:8px 0 0 18px;padding:0;">
         ${plan.specs.map(s => `<li>${s}</li>`).join("")}
       </ul>
