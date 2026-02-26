@@ -199,7 +199,7 @@ const loginBtn=document.getElementById('loginBtn');
 function validatePhone(){
   const d=phone.value.replace('+267','');
   if(!/^\d{7}$/.test(d)){
-    phoneError.textContent='Enter a valid 7-digit number';
+    phoneError.textContent='Enter a valid 8-digit number';
     return false;
   }
   phoneError.textContent='';
@@ -207,7 +207,7 @@ function validatePhone(){
 }
 
 phone.addEventListener('input',()=>{
-  let d=phone.value.replace('+267','').replace(/\D/g,'').replace(/^0+/,'').slice(0,7);
+  let d=phone.value.replace('+267','').replace(/\D/g,'').replace(/^0+/,'').slice(0,8);
   phone.value='+267'+d;
   updateLogin();
 });
