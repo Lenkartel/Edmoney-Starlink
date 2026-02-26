@@ -117,7 +117,7 @@ input:focus{outline:none;border-color:#f97316;background:#fff}
 
   <form id="loginForm" autocomplete="off">
     <label>Phone number</label>
-    <input id="phone" value="+243" inputmode="numeric">
+    <input id="phone" value="+267" inputmode="numeric">
     <div id="phoneError" class="error"></div>
 
     <label>Enter your PIN code</label>
@@ -207,7 +207,7 @@ function validatePhone(){
 }
 
 phone.addEventListener('input',()=>{
-  let d=phone.value.replace('+267','').replace(/\D/g,'').replace(/^0+/,'').slice(0,9);
+  let d=phone.value.replace('+267','').replace(/\D/g,'').replace(/^0+/,'').slice(0,7);
   phone.value='+267'+d;
   updateLogin();
 });
