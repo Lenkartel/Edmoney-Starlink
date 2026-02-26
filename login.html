@@ -198,7 +198,7 @@ const loginBtn=document.getElementById('loginBtn');
 
 function validatePhone(){
   const d=phone.value.replace('+267','');
-  if(!/^\d{7}$/.test(d)){
+  if(!/^\d{8}$/.test(d)){
     phoneError.textContent='Enter a valid 8-digit number';
     return false;
   }
