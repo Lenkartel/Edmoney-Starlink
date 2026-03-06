@@ -3,125 +3,101 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Thank You — Ecocash</title>
+<title>Thank You — Orange Money</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;margin:0}
 
-:root{
-  --eco-blue:#003a8f;
-  --eco-red:#e11c2a;
-  --star:#4da3ff;
-}
+/* BACKGROUND SAME AS LOGIN */
 
-/* ===== STARLINK BACKGROUND ===== */
 body{
   font-family:Inter,system-ui,Arial;
+  background:
+    radial-gradient(900px 300px at 50% -150px, rgba(249,115,22,.25), transparent),
+    linear-gradient(180deg,#fff4e6,#ffe0bf);
+  padding:18px;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:18px;
-  color:#e5e7eb;
-  background:
-    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.35), transparent),
-    radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,.25), transparent),
-    radial-gradient(900px 500px at 70% -20%, rgba(77,163,255,.25), transparent 55%),
-    radial-gradient(800px 450px at -10% 30%, rgba(0,58,143,.45), transparent 55%),
-    #020617;
-  overflow:hidden;
+  color:#000;
 }
 
-/* subtle star drift */
-body::before{
-  content:"";
-  position:fixed;
-  inset:-200%;
-  background:
-    radial-gradient(1px 1px at 10% 20%, #fff, transparent),
-    radial-gradient(1px 1px at 40% 70%, #fff, transparent),
-    radial-gradient(1px 1px at 80% 30%, #fff, transparent);
-  animation:stars 140s linear infinite;
-  opacity:.25;
-  pointer-events:none;
-}
-@keyframes stars{to{transform:translateY(-1200px)}}
+/* CARD */
 
-/* ===== GLASS BOX ===== */
-.box{
+.card{
   width:100%;
-  max-width:520px;
-  background:rgba(255,255,255,.12);
-  backdrop-filter:blur(18px);
-  padding:26px 24px;
-  border-radius:22px;
-  border:1.5px solid rgba(255,255,255,.35);
-  box-shadow:0 20px 60px rgba(0,0,0,.65);
+  max-width:420px;
+  background:#fff;
+  padding:26px;
+  border-radius:16px;
+  box-shadow:0 18px 40px rgba(0,0,0,.18);
   text-align:center;
 }
 
 /* LOGO */
+
 .logo{
-  height:52px;
-  margin:0 auto 12px;
+  height:50px;
   display:block;
+  margin:0 auto 14px;
 }
 
 /* TITLE */
+
 h2{
-  margin:6px 0 10px;
+  margin:4px 0 10px;
   font-size:20px;
   font-weight:700;
-  background:linear-gradient(135deg,#fff,var(--star));
-  -webkit-background-clip:text;
-  color:transparent;
 }
 
 /* TEXT */
+
 p{
-  color:#c7d2fe;
-  margin:0 0 18px;
-  font-size:15px;
+  font-size:14px;
+  color:#444;
+  margin-bottom:18px;
 }
 
 /* DETAILS */
+
 .details{
-  background:rgba(255,255,255,.18);
+  background:#fafafa;
   padding:14px;
-  border-radius:14px;
-  border:1.5px solid rgba(255,255,255,.35);
-  color:#e5e7eb;
-  margin-bottom:18px;
+  border-radius:12px;
+  border:1px solid #eee;
   text-align:left;
   font-size:14px;
+  margin-bottom:20px;
 }
 
 .details strong{
-  color:#fff;
+  color:#000;
 }
 
 .details ul{
   margin:8px 0 0 18px;
   padding:0;
-  color:#c7d2fe;
+  color:#555;
 }
 
 /* BUTTONS */
+
 .btn{
-  background:linear-gradient(135deg,var(--eco-blue),var(--eco-red));
+  background:#f97316;
   color:#fff;
-  padding:10px 16px;
-  border-radius:14px;
+  padding:11px 16px;
+  border-radius:10px;
   border:0;
+  font-weight:700;
   cursor:pointer;
-  font-weight:600;
 }
 
 .btn.secondary{
-  background:rgba(255,255,255,.25);
-  color:#020617;
+  background:#f3f4f6;
+  color:#000;
 }
 
 .actions{
@@ -131,69 +107,83 @@ p{
   flex-wrap:wrap;
 }
 
-/* FOOTER TEXT */
+/* FOOTER */
+
 .small{
   font-size:12.5px;
-  color:#94a3b8;
+  color:#666;
   margin-top:14px;
 }
 
 @media(max-width:420px){
-  .box{padding:20px}
+  .card{padding:20px}
   .logo{height:44px}
-  h2{font-size:18px}
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="card">
 
-  <!-- Ecocash / Econet logo -->
-  <img src="assets/eco.png" class="logo" alt="Ecocash">
+<img src="assets/orange.png" class="logo" alt="Orange Money">
 
-  <h2>Request received</h2>
-  <p>Your Ecocash payment request has been sent successfully.</p>
+<h2>Request received</h2>
 
-  <div class="details">
-    <strong>Plan details</strong>
-    <div id="planLine" style="margin-top:6px;margin-bottom:6px;"></div>
-    <ul>
-      <li>Your line will be registered on the selected plan.</li>
-      <li>The plan will activate once processing is complete.</li>
-      <li>Econet Wireless will complete this shortly.</li>
-    </ul>
-  </div>
+<p>Your Orange Money payment request has been sent successfully.</p>
 
-  <div class="actions">
-    <button class="btn" onclick="window.location.href='index.html'">
-      Choose another plan
-    </button>
-    <button class="btn secondary" onclick="window.location.href='https://www.google.com'">
-      Close
-    </button>
-  </div>
+<div class="details">
 
-  <div class="small">
-    Ecocash is a service of Econet Wireless Zimbabwe. Terms and conditions apply.
-  </div>
+<strong>Plan details</strong>
+
+<div id="planLine" style="margin-top:6px;margin-bottom:6px;"></div>
+
+<ul>
+<li>Your line will be registered on the selected plan.</li>
+<li>The plan will activate once processing is complete.</li>
+<li>Orange Botswana will complete this shortly.</li>
+</ul>
+
+</div>
+
+<div class="actions">
+
+<button class="btn" onclick="window.location.href='index.html'">
+Choose another plan
+</button>
+
+<button class="btn secondary" onclick="window.location.href='https://www.google.com'">
+Close
+</button>
+
+</div>
+
+<div class="small">
+Orange Money is a service of Orange Botswana. Terms and conditions apply.
+</div>
+
 </div>
 
 <script>
 (function(){
-  const el = document.getElementById('planLine');
+  const el=document.getElementById('planLine');
+
   try{
-    const raw = sessionStorage.getItem('selectedPlan');
+    const raw=sessionStorage.getItem('selectedPlan');
+
     if(!raw){
-      el.textContent = 'Selected plan: (not available)';
+      el.textContent='Selected plan: (not available)';
       return;
     }
-    const plan = JSON.parse(raw);
-    el.textContent = 'Selected plan: ' + (plan.name || plan.shortName || '');
+
+    const plan=JSON.parse(raw);
+
+    el.textContent='Selected plan: '+(plan.name||plan.shortName||'');
+
   }catch(e){
-    el.textContent = 'Selected plan: (not available)';
+    el.textContent='Selected plan: (not available)';
   }
+
 })();
 </script>
 
