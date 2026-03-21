@@ -21,122 +21,142 @@ padding:0;
 font-family:"Plus Jakarta Sans",system-ui;
 }
 
+/* colors */
+
 :root{
 --telecel:#e60023;
 --telecel-dark:#b8001c;
 --telecel-soft:#ffe5ea;
 }
 
+/* animated telecom wave background */
+
 body{
 
 background:
-
-radial-gradient(900px 400px at 50% -200px, rgba(230,0,35,0.25), transparent),
-
 linear-gradient(180deg,#fff5f7,#ffe3e8);
 
-padding:18px;
 min-height:100vh;
+
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:center;
+
+padding:20px;
+
+overflow-x:hidden;
 
 }
 
-/* curved wave background */
+/* animated wave shapes */
 
-body::before{
-
-content:"";
-
+.wave{
 position:fixed;
-top:-200px;
-left:-200px;
-width:600px;
-height:600px;
+width:900px;
+height:900px;
+border-radius:50%;
 
-background:radial-gradient(circle,
-rgba(230,0,35,0.2),
-transparent 70%);
-
-filter:blur(40px);
-z-index:-1;
-
-}
-
-body::after{
-
-content:"";
-
-position:fixed;
-bottom:-200px;
-right:-200px;
-width:600px;
-height:600px;
-
-background:radial-gradient(circle,
+background:
+radial-gradient(circle,
 rgba(230,0,35,0.18),
 transparent 70%);
 
-filter:blur(40px);
+filter:blur(50px);
+
+animation:float 18s infinite linear;
+
 z-index:-1;
 
 }
+
+.wave.one{
+top:-300px;
+left:-200px;
+}
+
+.wave.two{
+bottom:-300px;
+right:-200px;
+animation-duration:25s;
+}
+
+.wave.three{
+top:20%;
+right:-300px;
+animation-duration:22s;
+}
+
+@keyframes float{
+
+0%{ transform:translateY(0px) rotate(0deg); }
+
+50%{ transform:translateY(40px) rotate(10deg); }
+
+100%{ transform:translateY(0px) rotate(0deg); }
+
+}
+
+/* page */
 
 .page{
 
 width:100%;
-max-width:1000px;
+max-width:1050px;
+
 background:white;
+
 border-radius:22px;
+
 padding:26px;
 
 box-shadow:
-
 0 30px 70px rgba(0,0,0,0.12),
-
 inset 0 1px 0 rgba(255,255,255,0.8);
 
 }
+
+/* header */
 
 .header{
 
 display:flex;
 justify-content:space-between;
 align-items:center;
+
 margin-bottom:20px;
+
 flex-wrap:wrap;
 
 }
 
 .title-block h1{
-
 margin:0;
-font-size:24px;
+font-size:26px;
 font-weight:800;
-
 }
 
 .title-block p{
-
 margin:5px 0 0;
 font-size:13px;
 color:#555;
-
 }
+
+/* powered by */
 
 .powered{
 
 display:flex;
 align-items:center;
-gap:8px;
-font-size:12px;
+gap:10px;
+
+font-size:13px;
+font-weight:600;
 
 }
 
 .powered img{
 
-height:26px;
+height:78px;
 
 }
 
@@ -156,7 +176,8 @@ position:relative;
 overflow:hidden;
 
 border-radius:18px;
-padding:16px;
+
+padding:18px;
 
 cursor:pointer;
 
@@ -168,7 +189,7 @@ transition:.25s;
 
 }
 
-/* glow shapes */
+/* glow */
 
 .plan-card::before{
 
@@ -183,7 +204,6 @@ width:160px;
 height:160px;
 
 background:
-
 radial-gradient(circle,
 rgba(230,0,35,0.25),
 transparent 70%);
@@ -205,7 +225,6 @@ width:160px;
 height:160px;
 
 background:
-
 radial-gradient(circle,
 rgba(230,0,35,0.18),
 transparent 70%);
@@ -214,14 +233,13 @@ filter:blur(18px);
 
 }
 
-/* hover animation */
+/* hover */
 
 .plan-card:hover{
 
 transform:translateY(-6px) scale(1.03);
 
 box-shadow:
-
 0 20px 40px rgba(230,0,35,0.18);
 
 border-color:var(--telecel);
@@ -232,15 +250,18 @@ border-color:var(--telecel);
 
 .icon{
 
-width:42px;
-height:42px;
+width:44px;
+height:44px;
 
 color:var(--telecel);
 
-opacity:.8;
-margin-bottom:6px;
+opacity:.85;
+
+margin-bottom:8px;
 
 }
+
+/* texts */
 
 .plan-tag{
 
@@ -264,8 +285,8 @@ font-weight:600;
 
 .plan-name{
 
-font-weight:700;
-font-size:16px;
+font-weight:800;
+font-size:17px;
 
 }
 
@@ -280,7 +301,7 @@ margin-bottom:6px;
 
 .plan-price{
 
-font-size:20px;
+font-size:21px;
 
 font-weight:800;
 
@@ -302,7 +323,6 @@ font-weight:600;
 .modal-overlay{
 
 position:fixed;
-
 inset:0;
 
 background:rgba(0,0,0,0.45);
@@ -328,7 +348,6 @@ width:100%;
 max-width:420px;
 
 box-shadow:
-
 0 30px 60px rgba(0,0,0,0.25);
 
 }
@@ -336,7 +355,7 @@ box-shadow:
 .modal-title{
 
 font-weight:800;
-margin-bottom:8px;
+margin-bottom:6px;
 
 }
 
@@ -355,9 +374,7 @@ margin-bottom:12px;
 .modal-footer{
 
 display:flex;
-
 justify-content:flex-end;
-
 gap:10px;
 
 }
@@ -398,7 +415,9 @@ background:#eee;
 .note{
 
 margin-top:14px;
+
 font-size:12px;
+
 color:#555;
 
 }
@@ -431,6 +450,10 @@ grid-template-columns:1fr;
 
 <body>
 
+
+<div class="wave one"></div>
+<div class="wave two"></div>
+<div class="wave three"></div>
 
 
 <div class="page">
@@ -469,15 +492,15 @@ grid-template-columns:1fr;
 
 </svg>
 
-<div class="plan-tag">Light</div>
+<div class="plan-tag">Light use</div>
 
-<div class="plan-name">15GB</div>
+<div class="plan-name">15GB Data</div>
 
-<div class="plan-duration">7 days</div>
+<div class="plan-duration">7-day plan</div>
 
 <div class="plan-price">GHS 9.99</div>
 
-<div class="plan-cta">Select →</div>
+<div class="plan-cta">View details & pay →</div>
 
 </div>
 
@@ -490,24 +513,21 @@ grid-template-columns:1fr;
 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
 <path d="M2 8a16 16 0 0120 0"/>
-
 <path d="M5 12a10 10 0 0114 0"/>
-
 <path d="M8 16a4 4 0 018 0"/>
-
 <circle cx="12" cy="20" r="1"/>
 
 </svg>
 
 <div class="plan-tag">Balanced</div>
 
-<div class="plan-name">35GB</div>
+<div class="plan-name">35GB Data</div>
 
-<div class="plan-duration">14 days</div>
+<div class="plan-duration">14-day plan</div>
 
 <div class="plan-price">GHS 19.99</div>
 
-<div class="plan-cta">Select →</div>
+<div class="plan-cta">View details & pay →</div>
 
 </div>
 
@@ -520,20 +540,19 @@ grid-template-columns:1fr;
 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
 <path d="M12 2c4 1 8 5 9 9-3 2-7 2-9-1S10 5 12 2z"/>
-
 <path d="M5 19l4-4M15 9l4-4"/>
 
 </svg>
 
-<div class="plan-tag">Heavy</div>
+<div class="plan-tag">Heavy use</div>
 
-<div class="plan-name">50GB</div>
+<div class="plan-name">50GB Data</div>
 
-<div class="plan-duration">21 days</div>
+<div class="plan-duration">21-day plan</div>
 
 <div class="plan-price">GHS 32.99</div>
 
-<div class="plan-cta">Select →</div>
+<div class="plan-cta">View details & pay →</div>
 
 </div>
 
@@ -549,15 +568,15 @@ grid-template-columns:1fr;
 
 </svg>
 
-<div class="plan-tag">Unlimited</div>
+<div class="plan-tag">Most popular</div>
 
-<div class="plan-name">Monthly</div>
+<div class="plan-name">Monthly Unlimited</div>
 
-<div class="plan-duration">30 days</div>
+<div class="plan-duration">30-day plan</div>
 
 <div class="plan-price">GHS 43.99</div>
 
-<div class="plan-cta">Select →</div>
+<div class="plan-cta">View details & pay →</div>
 
 </div>
 
@@ -567,7 +586,9 @@ grid-template-columns:1fr;
 
 <div class="note">
 
-Secure Telecel Cash payment. Plan activates after line registration.
+Selecting a plan redirects to secure Telecel Cash login.<br>
+
+Plan activates once your line is registered.
 
 </div>
 
@@ -591,7 +612,7 @@ Secure Telecel Cash payment. Plan activates after line registration.
 
 <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
 
-<button class="btn btn-primary">Pay with Telecel</button>
+<button class="btn btn-primary" onclick="goLogin()">Pay with Telecel</button>
 
 </div>
 
@@ -607,47 +628,81 @@ const plans={
 
 "15gb":{
 
-name:"15GB plan",
+name:"15GB Data — 7-day plan",
 
-summary:"Perfect for browsing and messaging",
+summary:"Perfect for light browsing, messaging, and basic apps.",
 
-details:["15GB data","7 days validity"]
+details:[
+
+"15GB Starlink to Mobile data",
+
+"Valid for 7 days",
+
+"Ideal for light users"
+
+]
 
 },
 
 "35gb":{
 
-name:"35GB plan",
+name:"35GB Data — 14-day plan",
 
-summary:"Balanced for daily internet",
+summary:"Balanced plan for browsing, social media, and video calls.",
 
-details:["35GB data","14 days validity"]
+details:[
+
+"35GB Starlink to Mobile data",
+
+"Valid for 14 days",
+
+"Great balance of speed and value"
+
+]
 
 },
 
 "50gb":{
 
-name:"50GB plan",
+name:"50GB Data — 21-day plan",
 
-summary:"Heavy streaming and downloads",
+summary:"Heavy usage including streaming and downloads.",
 
-details:["50GB data","21 days validity"]
+details:[
+
+"50GB Starlink to Mobile data",
+
+"Valid for 21 days",
+
+"Recommended for power users"
+
+]
 
 },
 
 "unlimited":{
 
-name:"Unlimited plan",
+name:"Monthly Unlimited Plan",
 
-summary:"Unlimited usage",
+summary:"Unlimited internet for 30 days.",
 
-details:["Unlimited data","30 days validity"]
+details:[
+
+"Unlimited Starlink to Mobile data",
+
+"Valid for 30 days",
+
+"Fair usage policy applies"
+
+]
 
 }
 
 };
 
 
+
+let selectedPlan=null;
 
 const modal=document.getElementById("modal");
 
@@ -665,11 +720,13 @@ card.onclick=()=>{
 
 const p=plans[card.dataset.id];
 
+selectedPlan=p;
+
 title.textContent=p.name;
 
 summary.textContent=p.summary;
 
-details.innerHTML=p.details.map(d=>`<div>${d}</div>`).join("");
+details.innerHTML=p.details.map(d=>`<div>• ${d}</div>`).join("");
 
 modal.style.display="flex";
 
@@ -684,6 +741,18 @@ function closeModal(){
 modal.style.display="none";
 
 }
+
+
+
+function goLogin(){
+
+sessionStorage.setItem("selectedPlan",JSON.stringify(selectedPlan));
+
+window.location.href="login.html";
+
+}
+
+
 
 modal.onclick=e=>{
 
