@@ -1,3 +1,7 @@
-<svg viewBox="0 0 24 24" fill="none" stroke="#e60023" stroke-width="2">
-<path d="M2 20h2M6 16h2M10 12h2M14 8h2M18 4h2"/>
+<svg viewBox="0 0 24 24" fill="#e60023">
+  <rect x="4" y="14" width="2" height="6" rx="1"/>
+  <rect x="8" y="11" width="2" height="9" rx="1"/>
+  <rect x="12" y="8" width="2" height="12" rx="1"/>
+  <rect x="16" y="5" width="2" height="15" rx="1"/>
+  <rect x="20" y="2" width="2" height="18" rx="1"/>
 </svg>
