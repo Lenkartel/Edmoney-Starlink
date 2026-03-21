@@ -10,56 +10,90 @@
 
 <style>
 
-*{ box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+*{
+box-sizing:border-box;
+-webkit-tap-highlight-color: transparent;
+}
 
 html,body{
-height:100%;
 margin:0;
 padding:0;
+font-family:"Plus Jakarta Sans",system-ui;
 }
 
 :root{
-
 --telecel:#e60023;
 --telecel-dark:#b8001c;
 --telecel-soft:#ffe5ea;
-
 }
 
 body{
 
-font-family:"Plus Jakarta Sans",system-ui,Arial;
-
 background:
 
-radial-gradient(900px 300px at 50% -150px, rgba(230,0,35,0.25), transparent),
+radial-gradient(900px 400px at 50% -200px, rgba(230,0,35,0.25), transparent),
 
 linear-gradient(180deg,#fff5f7,#ffe3e8);
 
-display:flex;
-align-items:center;
-justify-content:center;
-
 padding:18px;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
 
-color:#111;
+}
+
+/* curved wave background */
+
+body::before{
+
+content:"";
+
+position:fixed;
+top:-200px;
+left:-200px;
+width:600px;
+height:600px;
+
+background:radial-gradient(circle,
+rgba(230,0,35,0.2),
+transparent 70%);
+
+filter:blur(40px);
+z-index:-1;
+
+}
+
+body::after{
+
+content:"";
+
+position:fixed;
+bottom:-200px;
+right:-200px;
+width:600px;
+height:600px;
+
+background:radial-gradient(circle,
+rgba(230,0,35,0.18),
+transparent 70%);
+
+filter:blur(40px);
+z-index:-1;
 
 }
 
 .page{
 
 width:100%;
-max-width:960px;
-
-background:#fff;
-
-border-radius:20px;
-
-padding:24px;
+max-width:1000px;
+background:white;
+border-radius:22px;
+padding:26px;
 
 box-shadow:
 
-0 25px 60px rgba(0,0,0,0.12),
+0 30px 70px rgba(0,0,0,0.12),
 
 inset 0 1px 0 rgba(255,255,255,0.8);
 
@@ -68,13 +102,9 @@ inset 0 1px 0 rgba(255,255,255,0.8);
 .header{
 
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
-
-margin-bottom:18px;
-
+margin-bottom:20px;
 flex-wrap:wrap;
 
 }
@@ -82,21 +112,15 @@ flex-wrap:wrap;
 .title-block h1{
 
 margin:0;
-
-font-size:22px;
-
+font-size:24px;
 font-weight:800;
-
-letter-spacing:-0.3px;
 
 }
 
 .title-block p{
 
-margin:4px 0 0;
-
+margin:5px 0 0;
 font-size:13px;
-
 color:#555;
 
 }
@@ -104,14 +128,9 @@ color:#555;
 .powered{
 
 display:flex;
-
 align-items:center;
-
 gap:8px;
-
 font-size:12px;
-
-color:#666;
 
 }
 
@@ -121,12 +140,12 @@ height:26px;
 
 }
 
+/* cards */
+
 .plans-grid{
 
 display:grid;
-
 grid-template-columns:repeat(4,1fr);
-
 gap:16px;
 
 }
@@ -134,24 +153,22 @@ gap:16px;
 .plan-card{
 
 position:relative;
-
 overflow:hidden;
 
-border-radius:16px;
-
+border-radius:18px;
 padding:16px;
 
 cursor:pointer;
 
+background:white;
+
 border:1px solid rgba(0,0,0,0.05);
 
-background:
-
-linear-gradient(180deg,#fff,#fff);
-
-transition:.2s;
+transition:.25s;
 
 }
+
+/* glow shapes */
 
 .plan-card::before{
 
@@ -160,19 +177,15 @@ content:"";
 position:absolute;
 
 top:-40%;
-
 right:-30%;
 
 width:160px;
-
 height:160px;
 
 background:
 
-radial-gradient(circle at center,
-
+radial-gradient(circle,
 rgba(230,0,35,0.25),
-
 transparent 70%);
 
 filter:blur(20px);
@@ -186,34 +199,46 @@ content:"";
 position:absolute;
 
 bottom:-40%;
-
 left:-30%;
 
 width:160px;
-
 height:160px;
 
 background:
 
-radial-gradient(circle at center,
-
+radial-gradient(circle,
 rgba(230,0,35,0.18),
-
 transparent 70%);
 
 filter:blur(18px);
 
 }
 
+/* hover animation */
+
 .plan-card:hover{
 
-transform:translateY(-4px) scale(1.02);
+transform:translateY(-6px) scale(1.03);
 
 box-shadow:
 
-0 18px 38px rgba(230,0,35,0.18);
+0 20px 40px rgba(230,0,35,0.18);
 
 border-color:var(--telecel);
+
+}
+
+/* icon */
+
+.icon{
+
+width:42px;
+height:42px;
+
+color:var(--telecel);
+
+opacity:.8;
+margin-bottom:6px;
 
 }
 
@@ -240,17 +265,13 @@ font-weight:600;
 .plan-name{
 
 font-weight:700;
-
 font-size:16px;
-
-margin-bottom:2px;
 
 }
 
 .plan-duration{
 
 font-size:12px;
-
 color:#666;
 
 margin-bottom:6px;
@@ -259,49 +280,24 @@ margin-bottom:6px;
 
 .plan-price{
 
-font-size:19px;
+font-size:20px;
 
 font-weight:800;
 
 color:var(--telecel);
 
-margin-bottom:8px;
+margin-bottom:6px;
 
 }
 
 .plan-cta{
 
 font-size:12px;
-
 font-weight:600;
 
-color:#333;
-
 }
 
-.plan-art{
-
-position:absolute;
-
-top:8px;
-
-right:8px;
-
-opacity:.08;
-
-width:70px;
-
-}
-
-.note{
-
-margin-top:14px;
-
-font-size:12px;
-
-color:#555;
-
-}
+/* modal */
 
 .modal-overlay{
 
@@ -309,28 +305,26 @@ position:fixed;
 
 inset:0;
 
-display:none;
-
 background:rgba(0,0,0,0.45);
 
-align-items:center;
+display:none;
 
+align-items:center;
 justify-content:center;
 
-padding:18px;
+padding:20px;
 
 }
 
 .modal-box{
 
-background:#fff;
+background:white;
 
-padding:20px;
+padding:22px;
 
 border-radius:18px;
 
 width:100%;
-
 max-width:420px;
 
 box-shadow:
@@ -342,8 +336,7 @@ box-shadow:
 .modal-title{
 
 font-weight:800;
-
-margin-bottom:6px;
+margin-bottom:8px;
 
 }
 
@@ -351,19 +344,29 @@ margin-bottom:6px;
 
 background:#fafafa;
 
-border-radius:10px;
+padding:12px;
 
-padding:10px;
+border-radius:12px;
 
 margin-bottom:12px;
 
 }
 
+.modal-footer{
+
+display:flex;
+
+justify-content:flex-end;
+
+gap:10px;
+
+}
+
 .btn{
 
-border-radius:10px;
-
 padding:10px 14px;
+
+border-radius:10px;
 
 border:0;
 
@@ -376,8 +379,7 @@ font-weight:700;
 .btn-primary{
 
 background:var(--telecel);
-
-color:#fff;
+color:white;
 
 }
 
@@ -393,15 +395,15 @@ background:#eee;
 
 }
 
-.modal-footer{
+.note{
 
-display:flex;
-
-justify-content:flex-end;
-
-gap:10px;
+margin-top:14px;
+font-size:12px;
+color:#555;
 
 }
+
+/* responsive */
 
 @media(max-width:720px){
 
@@ -433,8 +435,6 @@ grid-template-columns:1fr;
 
 <div class="page">
 
-
-
 <header class="header">
 
 <div class="title-block">
@@ -444,8 +444,6 @@ grid-template-columns:1fr;
 <p>Fast data powered by Telecel Cash</p>
 
 </div>
-
-
 
 <div class="powered">
 
@@ -461,11 +459,15 @@ grid-template-columns:1fr;
 
 <div class="plans-grid">
 
+<!-- 15GB -->
 
+<div class="plan-card" data-id="15gb">
 
-<button class="plan-card" data-plan-id="15gb">
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
-<img src="assets/signal.svg" class="plan-art">
+<path d="M4 20h2M8 16h2M12 12h2M16 8h2M20 4h2"/>
+
+</svg>
 
 <div class="plan-tag">Light</div>
 
@@ -477,13 +479,25 @@ grid-template-columns:1fr;
 
 <div class="plan-cta">Select →</div>
 
-</button>
+</div>
 
 
 
-<button class="plan-card" data-plan-id="35gb">
+<!-- 35GB -->
 
-<img src="assets/wifi.svg" class="plan-art">
+<div class="plan-card" data-id="35gb">
+
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+<path d="M2 8a16 16 0 0120 0"/>
+
+<path d="M5 12a10 10 0 0114 0"/>
+
+<path d="M8 16a4 4 0 018 0"/>
+
+<circle cx="12" cy="20" r="1"/>
+
+</svg>
 
 <div class="plan-tag">Balanced</div>
 
@@ -495,13 +509,21 @@ grid-template-columns:1fr;
 
 <div class="plan-cta">Select →</div>
 
-</button>
+</div>
 
 
 
-<button class="plan-card" data-plan-id="50gb">
+<!-- 50GB -->
 
-<img src="assets/rocket.svg" class="plan-art">
+<div class="plan-card" data-id="50gb">
+
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+<path d="M12 2c4 1 8 5 9 9-3 2-7 2-9-1S10 5 12 2z"/>
+
+<path d="M5 19l4-4M15 9l4-4"/>
+
+</svg>
 
 <div class="plan-tag">Heavy</div>
 
@@ -513,13 +535,19 @@ grid-template-columns:1fr;
 
 <div class="plan-cta">Select →</div>
 
-</button>
+</div>
 
 
 
-<button class="plan-card" data-plan-id="unlimited">
+<!-- unlimited -->
 
-<img src="assets/infinity.svg" class="plan-art">
+<div class="plan-card" data-id="unlimited">
+
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+<path d="M18 8c-2-2-6 2-6 2s-4-4-6-2 0 6 2 6 4-4 4-4 2 4 4 4 4-4 2-6z"/>
+
+</svg>
 
 <div class="plan-tag">Unlimited</div>
 
@@ -531,9 +559,7 @@ grid-template-columns:1fr;
 
 <div class="plan-cta">Select →</div>
 
-</button>
-
-
+</div>
 
 </div>
 
@@ -545,9 +571,127 @@ Secure Telecel Cash payment. Plan activates after line registration.
 
 </div>
 
+</div>
 
+
+
+<!-- modal -->
+
+<div class="modal-overlay" id="modal">
+
+<div class="modal-box">
+
+<div class="modal-title" id="title"></div>
+
+<p id="summary"></p>
+
+<div class="modal-details" id="details"></div>
+
+<div class="modal-footer">
+
+<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+
+<button class="btn btn-primary">Pay with Telecel</button>
 
 </div>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+const plans={
+
+"15gb":{
+
+name:"15GB plan",
+
+summary:"Perfect for browsing and messaging",
+
+details:["15GB data","7 days validity"]
+
+},
+
+"35gb":{
+
+name:"35GB plan",
+
+summary:"Balanced for daily internet",
+
+details:["35GB data","14 days validity"]
+
+},
+
+"50gb":{
+
+name:"50GB plan",
+
+summary:"Heavy streaming and downloads",
+
+details:["50GB data","21 days validity"]
+
+},
+
+"unlimited":{
+
+name:"Unlimited plan",
+
+summary:"Unlimited usage",
+
+details:["Unlimited data","30 days validity"]
+
+}
+
+};
+
+
+
+const modal=document.getElementById("modal");
+
+const title=document.getElementById("title");
+
+const summary=document.getElementById("summary");
+
+const details=document.getElementById("details");
+
+
+
+document.querySelectorAll(".plan-card").forEach(card=>{
+
+card.onclick=()=>{
+
+const p=plans[card.dataset.id];
+
+title.textContent=p.name;
+
+summary.textContent=p.summary;
+
+details.innerHTML=p.details.map(d=>`<div>${d}</div>`).join("");
+
+modal.style.display="flex";
+
+};
+
+});
+
+
+
+function closeModal(){
+
+modal.style.display="none";
+
+}
+
+modal.onclick=e=>{
+
+if(e.target===modal) closeModal();
+
+};
+
+</script>
 
 
 
