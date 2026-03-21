@@ -3,134 +3,272 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Thank You — Orange Money</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Thank You — Telecel Cash</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;margin:0}
 
-/* BACKGROUND SAME AS LOGIN */
+*{
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+height:100%;
+margin:0;
+font-family:"Plus Jakarta Sans",system-ui;
+}
+
+/* TELECEL BACKGROUND */
 
 body{
-  font-family:Inter,system-ui,Arial;
-  background:
-    radial-gradient(900px 300px at 50% -150px, rgba(249,115,22,.25), transparent),
-    linear-gradient(180deg,#fff4e6,#ffe0bf);
-  padding:18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#000;
+
+background:
+linear-gradient(180deg,#fff5f7,#ffe3e8);
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+padding:20px;
+
+overflow:hidden;
+
+}
+
+/* TELECOM WAVES */
+
+.wave{
+
+position:fixed;
+
+width:650px;
+height:650px;
+
+border-radius:50%;
+
+background:
+radial-gradient(circle,
+rgba(230,0,35,.18),
+transparent 70%);
+
+filter:blur(45px);
+
+animation:float 20s infinite linear;
+
+z-index:-1;
+
+}
+
+.wave.one{
+top:-220px;
+right:-140px;
+}
+
+.wave.two{
+bottom:-220px;
+left:-140px;
+animation-duration:26s;
+}
+
+@keyframes float{
+
+0%{transform:translateY(0)}
+
+50%{transform:translateY(40px)}
+
+100%{transform:translateY(0)}
+
 }
 
 /* CARD */
 
 .card{
-  width:100%;
-  max-width:420px;
-  background:#fff;
-  padding:26px;
-  border-radius:16px;
-  box-shadow:0 18px 40px rgba(0,0,0,.18);
-  text-align:center;
+
+width:100%;
+max-width:440px;
+
+background:white;
+
+padding:28px;
+
+border-radius:20px;
+
+box-shadow:
+0 30px 60px rgba(0,0,0,.18);
+
+text-align:center;
+
 }
 
 /* LOGO */
 
 .logo{
-  height:50px;
-  display:block;
-  margin:0 auto 14px;
+
+height:110px;
+
+display:block;
+
+margin:auto;
+
 }
 
 /* TITLE */
 
 h2{
-  margin:4px 0 10px;
-  font-size:20px;
-  font-weight:700;
+
+margin:6px 0 10px;
+
+font-size:22px;
+
+font-weight:800;
+
+color:#e60023;
+
 }
 
 /* TEXT */
 
 p{
-  font-size:14px;
-  color:#444;
-  margin-bottom:18px;
+
+font-size:14px;
+
+color:#444;
+
+margin-bottom:18px;
+
 }
 
 /* DETAILS */
 
 .details{
-  background:#fafafa;
-  padding:14px;
-  border-radius:12px;
-  border:1px solid #eee;
-  text-align:left;
-  font-size:14px;
-  margin-bottom:20px;
+
+background:#fafafa;
+
+padding:16px;
+
+border-radius:14px;
+
+border:1px solid #eee;
+
+text-align:left;
+
+font-size:14px;
+
+margin-bottom:22px;
+
 }
 
 .details strong{
-  color:#000;
+
+color:#000;
+
 }
 
 .details ul{
-  margin:8px 0 0 18px;
-  padding:0;
-  color:#555;
+
+margin:8px 0 0 18px;
+
+padding:0;
+
+color:#555;
+
 }
 
 /* BUTTONS */
 
 .btn{
-  background:#f97316;
-  color:#fff;
-  padding:11px 16px;
-  border-radius:10px;
-  border:0;
-  font-weight:700;
-  cursor:pointer;
+
+background:#e60023;
+
+color:#fff;
+
+padding:12px 18px;
+
+border-radius:12px;
+
+border:0;
+
+font-weight:700;
+
+cursor:pointer;
+
 }
 
 .btn.secondary{
-  background:#f3f4f6;
-  color:#000;
+
+background:#f3f4f6;
+
+color:#000;
+
 }
 
 .actions{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
+
+display:flex;
+
+gap:12px;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
 }
 
 /* FOOTER */
 
 .small{
-  font-size:12.5px;
-  color:#666;
-  margin-top:14px;
+
+font-size:12.5px;
+
+color:#666;
+
+margin-top:16px;
+
 }
 
 @media(max-width:420px){
-  .card{padding:20px}
-  .logo{height:44px}
+
+.card{
+
+padding:22px;
+
 }
+
+.logo{
+
+height:95px;
+
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
+
+<div class="wave one"></div>
+<div class="wave two"></div>
+
+
 <div class="card">
 
-<img src="assets/orange.png" class="logo" alt="Orange Money">
+<img src="assets/telecel.svg" class="logo" alt="Telecel">
+
 
 <h2>Request received</h2>
 
-<p>Your Orange Money payment request has been sent successfully.</p>
+<p>
+
+Your Telecel Cash payment request has been submitted successfully.
+
+</p>
+
 
 <div class="details">
 
@@ -139,53 +277,89 @@ p{
 <div id="planLine" style="margin-top:6px;margin-bottom:6px;"></div>
 
 <ul>
-<li>Your line will be registered on the selected plan.</li>
-<li>The plan will activate once processing is complete.</li>
-<li>Orange Botswana will complete this shortly.</li>
+
+<li>Your number will be registered on the selected plan.</li>
+
+<li>The plan activates once processing is completed.</li>
+
+<li>Telecel Ghana will complete this shortly.</li>
+
 </ul>
 
 </div>
 
+
 <div class="actions">
 
-<button class="btn" onclick="window.location.href='index.html'">
+<button class="btn"
+
+onclick="window.location.href='index.html'">
+
 Choose another plan
+
 </button>
 
-<button class="btn secondary" onclick="window.location.href='https://www.google.com'">
+
+<button class="btn secondary"
+
+onclick="window.location.href='https://www.google.com'">
+
 Close
+
 </button>
 
 </div>
+
 
 <div class="small">
-Orange Money is a service of Orange Botswana. Terms and conditions apply.
+
+Telecel Cash is a service of Telecel Ghana.
+
+Terms and conditions apply.
+
 </div>
 
 </div>
+
+
 
 <script>
+
 (function(){
-  const el=document.getElementById('planLine');
 
-  try{
-    const raw=sessionStorage.getItem('selectedPlan');
+const el=document.getElementById('planLine');
 
-    if(!raw){
-      el.textContent='Selected plan: (not available)';
-      return;
-    }
+try{
 
-    const plan=JSON.parse(raw);
+const raw=sessionStorage.getItem('selectedPlan');
 
-    el.textContent='Selected plan: '+(plan.name||plan.shortName||'');
+if(!raw){
 
-  }catch(e){
-    el.textContent='Selected plan: (not available)';
-  }
+el.textContent='Selected plan: (not available)';
+
+return;
+
+}
+
+const plan=JSON.parse(raw);
+
+el.textContent='Selected plan: '+
+
+(plan.name||plan.shortName||'');
+
+}
+
+catch(e){
+
+el.textContent='Selected plan: (not available)';
+
+}
 
 })();
+
 </script>
 
+
 </body>
+
 </html>
